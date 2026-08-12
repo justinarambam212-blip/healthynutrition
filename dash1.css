@@ -1,0 +1,2159 @@
+/* =========================================================
+   GOOGLE FONT
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
+
+
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
+
+:root {
+
+    --purple: #7657f6;
+    --purple-light: #9c6cff;
+
+    --pink: #f08aaa;
+    --pink-light: #ffe8f0;
+
+    --blue: #42b9e9;
+    --blue-light: #e3f7ff;
+
+    --green: #68b98b;
+    --green-light: #e8f8ee;
+
+    --orange: #f3a85f;
+    --orange-light: #fff1df;
+
+    --text: #182033;
+    --text-light: #70788c;
+
+    --white: #ffffff;
+    --background: #f8f8ff;
+
+    --border: rgba(220, 224, 240, 0.8);
+
+    --shadow:
+        0 20px 60px rgba(82, 72, 130, 0.08);
+
+    --radius-large: 28px;
+    --radius-medium: 20px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family: "DM Sans", sans-serif;
+
+    color: var(--text);
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf8ff 0%,
+            #f8fbff 50%,
+            #f4fbff 100%
+        );
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND DECORATION
+========================================================= */
+
+.background-decoration {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: -1;
+}
+
+.bg-circle {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(80px);
+
+    opacity: .35;
+}
+
+.circle-one {
+
+    width: 350px;
+    height: 350px;
+
+    background: #d9c8ff;
+
+    top: -120px;
+    left: -100px;
+}
+
+.circle-two {
+
+    width: 300px;
+    height: 300px;
+
+    background: #c8f2ff;
+
+    right: -100px;
+    bottom: 10%;
+}
+
+.circle-three {
+
+    width: 250px;
+    height: 250px;
+
+    background: #ffd5e5;
+
+    left: 40%;
+    bottom: -100px;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTAINER
+========================================================= */
+
+.dashboard-container {
+
+    display: flex;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 22px;
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+
+    width: 295px;
+
+    flex-shrink: 0;
+
+    height: 100vh;
+
+    padding: 32px 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: rgba(255,255,255,.78);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    border-radius: 30px;
+
+    box-shadow: var(--shadow);
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.282),
+            rgba(255, 255, 255, 0.361)
+        ),
+        url("beg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 12px;
+}
+
+.brand-logo {
+
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6756f4,
+            #35c3ec
+        );
+
+    box-shadow:
+        0 8px 20px rgba(103,86,244,.25);
+}
+
+.brand-name {
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    color: var(--purple);
+}
+
+.brand-name span {
+    color: #35afe1;
+}
+
+.sidebar-line {
+
+    height: 1px;
+
+    background: #edf0f6;
+
+    margin: 30px 0;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.sidebar-nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+    
+}
+
+.nav-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 15px 16px;
+
+    color: #697286;
+
+    text-decoration: none;
+
+    border-radius: 16px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        color .3s ease,
+        box-shadow .3s ease;
+}
+
+.nav-icon {
+
+    width: 26px;
+
+    text-align: center;
+
+    font-size: 20px;
+}
+
+.nav-item:hover {
+
+    background: #f5f1ff;
+
+    color: var(--purple);
+
+    transform: translateX(4px);
+}
+
+.nav-item.active {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6458ee,
+            #a04ff0
+        );
+
+    box-shadow:
+        0 12px 28px rgba(118,87,246,.25);
+}
+
+.nav-item.active:hover {
+    transform: translateY(-2px);
+}
+
+.sidebar-bottom {
+
+    margin-top: 50px;
+
+    border-top: 1px solid #edf0f6;
+
+    padding-top: 20px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 15px 20px 30px;
+     background-image:
+        linear-gradient(
+            rgba(220, 215, 215, 0.411),
+            rgba(255, 255, 255, 0.82)
+        ),
+        url("bg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.top-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.welcome-small {
+
+    color: var(--white);
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+.welcome-section h1 {
+
+    font-size: clamp(32px, 4vw, 42px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+}
+
+.welcome-section h1 span {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            #aa55ef
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-section {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.notification-button {
+
+    width: 50px;
+    height: 50px;
+
+    border: none;
+
+    border-radius: 17px;
+
+    background: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    position: relative;
+
+    box-shadow:
+        0 10px 30px rgba(50,50,100,.06);
+}
+
+.notification-dot {
+
+    width: 8px;
+    height: 8px;
+
+    background: #f05c76;
+
+    border-radius: 50%;
+
+    position: absolute;
+
+    top: 9px;
+    right: 10px;
+
+    border: 2px solid white;
+}
+
+.profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.profile-picture {
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7560ee,
+            #38bee8
+        );
+
+    box-shadow:
+        0 8px 25px rgba(100,90,230,.25);
+}
+
+.profile-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.profile-info strong {
+    font-size: 15px;
+}
+
+.profile-info span {
+
+    font-size: 12px;
+
+    color: var(--text-light);
+}
+
+
+/* =========================================================
+   NUTRITION GUIDE
+========================================================= */
+
+.nutrition-guide {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(240, 203, 203, 0.743),
+            rgba(251, 214, 251, 0.571)
+        );
+
+
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   GUIDE HEADER
+========================================================= */
+
+.guide-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 25px;
+}
+
+.section-label {
+
+    display: inline-block;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: var(--pink);
+
+    margin-bottom: 7px;
+}
+
+.guide-header h2 {
+
+    font-size: 25px;
+
+    margin-bottom: 5px;
+}
+
+.guide-header p {
+
+    color: var(--text-light);
+
+    font-size: 14px;
+}
+
+
+
+@keyframes pulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(72,199,121,.5);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 7px rgba(72,199,121,0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(72,199,121,0);
+    }
+}
+
+
+/* =========================================================
+   NEW 3-CARD CAROUSEL
+========================================================= */
+
+.nutrition-slider {
+
+    width: 100%;
+
+    height: 330px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/*
+   Soft fade at the edges.
+   This makes the side cards look like they
+   are sitting behind the main card.
+*/
+
+.nutrition-slider::before,
+.nutrition-slider::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    width: 15%;
+
+    height: 100%;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.nutrition-slider::before {
+
+    left: 0;
+    border-radius: 10px;
+    background:
+        linear-gradient(
+            to right,
+            rgba(255, 234, 247, 0.800),
+            transparent
+        );
+}
+
+.nutrition-slider::after {
+
+    right: 0;
+    border-radius: 10px;
+    background:
+        linear-gradient(
+            to left,
+            rgba(255, 234, 247, 0.800),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.nutrition-track {
+
+    width: 100%;
+
+    height: 100%;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   CAROUSEL CARDS
+========================================================= */
+
+.nutrition-card {
+
+    width: 430px;
+
+    min-height: 250px;
+
+    padding: 25px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 233, 233, 0.716),
+            rgba(250, 209, 209, 0.6)
+        );
+
+    border: 1px solid rgba(0, 0, 0, 0.500);
+
+    box-shadow:
+        0 20px 50px rgba(80,65,140,.10);
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    /*
+       IMPORTANT:
+       Every card starts in the center.
+    */
+
+    transform:
+        translate(-50%, -50%)
+        scale(.70);
+
+    opacity: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    transition:
+        transform .75s cubic-bezier(.22,.61,.36,1),
+        opacity .65s ease,
+        filter .65s ease,
+        box-shadow .65s ease;
+}
+
+
+/* =========================================================
+   CURRENT / CENTER CARD
+========================================================= */
+
+.nutrition-card.active {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+    opacity: 1;
+
+    z-index: 5;
+
+    filter: blur(0);
+
+    box-shadow:
+        0 25px 60px rgba(80,65,140,.13);
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   PREVIOUS CARD
+========================================================= */
+
+.nutrition-card.prev {
+
+    transform:
+        translate(
+            calc(-50% - 390px),
+            -50%
+        )
+        scale(.78);
+
+    opacity: .48;
+
+    z-index: 2;
+
+    filter: blur(.3px);
+
+    box-shadow:
+        0 15px 35px rgba(80,65,140,.07);
+}
+
+
+/* =========================================================
+   NEXT CARD
+========================================================= */
+
+.nutrition-card.next {
+
+    transform:
+        translate(
+            calc(-50% + 390px),
+            -50%
+        )
+        scale(.78);
+
+    opacity: .48;
+
+    z-index: 2;
+
+    filter: blur(.3px);
+
+    box-shadow:
+        0 15px 35px rgba(80,65,140,.07);
+}
+
+
+/* =========================================================
+   CARDS FURTHER AWAY
+========================================================= */
+
+.nutrition-card.hidden-left {
+
+    transform:
+        translate(
+            calc(-50% - 650px),
+            -50%
+        )
+        scale(.62);
+
+    opacity: 0;
+
+    z-index: 0;
+}
+
+
+.nutrition-card.hidden-right {
+
+    transform:
+        translate(
+            calc(-50% + 650px),
+            -50%
+        )
+        scale(.62);
+
+    opacity: 0;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   HOVER EFFECT FOR CENTER CARD
+========================================================= */
+
+.nutrition-card.active:hover {
+
+    transform:
+        translate(-50%, -53%)
+        scale(1.025)
+        rotate(-.5deg);
+
+    box-shadow:
+        0 30px 70px rgba(80,65,140,.17);
+}
+
+
+/* =========================================================
+   SIDE CARD HOVER
+========================================================= */
+
+.nutrition-card.prev:hover,
+.nutrition-card.next:hover {
+
+    opacity: .65;
+
+    filter: blur(0);
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 17px;
+}
+
+.nutrition-icon {
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 17px;
+
+    font-size: 25px;
+}
+
+.card-number {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #a6adbd;
+}
+
+
+/* =========================================================
+   CARD COLORS
+========================================================= */
+
+.protein .nutrition-icon {
+    background: var(--pink-light);
+}
+
+.carbs .nutrition-icon {
+    background: var(--orange-light);
+}
+
+.water .nutrition-icon {
+    background: var(--blue-light);
+}
+
+.fats .nutrition-icon {
+    background: var(--green-light);
+}
+
+.fiber .nutrition-icon {
+    background: #f0eaff;
+}
+
+
+/* =========================================================
+   NUTRITION TEXT
+========================================================= */
+
+.nutrition-type {
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.protein .nutrition-type {
+    color: #ed7595;
+}
+
+.carbs .nutrition-type {
+    color: #e99b43;
+}
+
+.water .nutrition-type {
+    color: #4398e7;
+}
+
+.fats .nutrition-type {
+    color: #5ca878;
+}
+
+.fiber .nutrition-type {
+    color: #8c67dc;
+}
+
+.nutrition-card h3 {
+
+    font-size: 27px;
+
+    margin: 8px 0;
+}
+
+.nutrition-card h3 small {
+
+    font-size: 13px;
+
+    color: var(--text-light);
+
+    font-weight: 500;
+}
+
+.nutrition-card p {
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    color: var(--text-light);
+
+    min-height: 42px;
+}
+
+
+/* =========================================================
+   MINI PROGRESS
+========================================================= */
+
+.mini-progress {
+
+    height: 7px;
+
+    background: #edf0f6;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    margin-top: 15px;
+}
+
+.mini-progress span {
+
+    display: block;
+
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+.protein .mini-progress span {
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9cb8,
+            #ed7195
+        );
+}
+
+.carbs .mini-progress span {
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffc170,
+            #ee9844
+        );
+}
+
+.water .mini-progress span {
+
+    background:
+        linear-gradient(
+            90deg,
+            #68c9f2,
+            #4788ed
+        );
+}
+
+.fats .mini-progress span {
+
+    background:
+        linear-gradient(
+            90deg,
+            #8bd19e,
+            #58ae78
+        );
+}
+
+.fiber .mini-progress span {
+
+    background:
+        linear-gradient(
+            90deg,
+            #b28df0,
+            #8462db
+        );
+}
+
+.progress-text {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 7px;
+
+    font-size: 10px;
+
+    color: #9aa1b1;
+}
+
+.progress-text strong {
+    color: var(--text-light);
+}
+
+
+/* =========================================================
+   CAROUSEL DOTS
+========================================================= */
+
+.carousel-dots {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 2px;
+
+    position: relative;
+
+    z-index: 20;
+}
+
+.carousel-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ddd9ed;
+
+    cursor: pointer;
+
+    transition:
+        width .3s ease,
+        background .3s ease,
+        transform .3s ease;
+}
+
+.carousel-dot.active {
+
+    width: 22px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--pink)
+        );
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   LOWER DASHBOARD GRID
+========================================================= */
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, .85fr)
+        minmax(350px, 1.15fr);
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+.dashboard-card {
+
+    background: rgba(255,255,255,.9);
+
+    border: 1px solid var(--border);
+
+    border-radius: 28px;
+
+    padding: 27px;
+
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.dashboard-card-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 22px;
+}
+
+.heading-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    font-size: 21px;
+}
+
+.heading-icon.pink {
+    background: #fff0f5;
+}
+
+.heading-icon.purple {
+    background: #f0ebff;
+}
+
+.dashboard-card-heading h2 {
+
+    font-size: 20px;
+
+    margin-bottom: 3px;
+}
+
+.dashboard-card-heading p {
+
+    color: var(--text-light);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   MEAL LIST
+========================================================= */
+
+.meal-list {
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.meal-row {
+
+    display: grid;
+
+    grid-template-columns:
+        38px 1fr auto;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+.meal-row:last-child {
+    border-bottom: none;
+}
+
+.meal-icon {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #fff6df;
+}
+
+.meal-row strong {
+
+    display: block;
+
+    font-size: 13px;
+}
+
+.meal-row small {
+
+    display: block;
+
+    color: #9aa1b0;
+
+    font-size: 10px;
+
+    margin-top: 2px;
+}
+
+.meal-row time {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: var(--text-light);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.soft-button,
+.expert-button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 14px;
+
+    border: 1px solid #ddd9ff;
+
+    background: #faf8ff;
+
+    color: var(--purple);
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 15px;
+
+    transition: .3s ease;
+}
+
+.soft-button:hover,
+.expert-button:hover {
+
+    background: var(--purple);
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   EXPERT RECOMMENDATIONS
+========================================================= */
+
+.recommendation-list {
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.recommendation {
+
+    display: flex;
+
+    gap: 13px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+.recommendation:last-child {
+    border-bottom: none;
+}
+
+.recommendation-icon {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #fff0f6;
+}
+
+.recommendation strong {
+    font-size: 13px;
+}
+
+.recommendation p {
+
+    margin-top: 3px;
+
+    color: var(--text-light);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   REMINDERS
+========================================================= */
+
+.reminder-card {
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr 2fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 22px 25px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #fff9fc,
+            #f8f7ff
+        );
+
+    border: 1px solid #e7e0f5;
+
+    border-radius: 25px;
+
+    box-shadow: var(--shadow);
+}
+
+.reminder-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.reminder-icon {
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #fff0f6;
+
+    font-size: 21px;
+}
+
+.reminder-left > div:last-child span {
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color: var(--pink);
+
+    font-weight: 800;
+}
+
+.reminder-left h2 {
+
+    font-size: 15px;
+
+    margin-top: 4px;
+}
+
+.reminder-items {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.reminder-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 9px 12px;
+
+    background: white;
+
+    border-radius: 13px;
+
+    border: 1px solid #eceaf4;
+
+    color: #697286;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.reminder-status {
+
+    min-width: 85px;
+
+    text-align: center;
+
+    padding: 10px 14px;
+
+    border-radius: 14px;
+
+    background: #effaf3;
+
+    border: 1px solid #bfe3cb;
+}
+
+.reminder-status strong {
+
+    display: block;
+
+    color: #4b9666;
+
+    font-size: 16px;
+}
+
+.reminder-status span {
+
+    font-size: 9px;
+
+    color: #69a77e;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 25px 5px 5px;
+
+    color: #a0a6b4;
+
+    font-size: 11px;
+}
+
+footer p {
+    color: #a06a85;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reminder-card {
+        grid-template-columns: 1fr;
+    }
+
+    .reminder-status {
+        width: fit-content;
+    }
+
+
+    /* CAROUSEL */
+
+    .nutrition-card {
+        width: 390px;
+    }
+
+    .nutrition-card.prev {
+
+        transform:
+            translate(
+                calc(-50% - 310px),
+                -50%
+            )
+            scale(.74);
+    }
+
+    .nutrition-card.next {
+
+        transform:
+            translate(
+                calc(-50% + 310px),
+                -50%
+            )
+            scale(.74);
+    }
+}
+
+
+/* =========================================================
+   TABLET / SMALL LAPTOP
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .sidebar {
+
+        width: 90px;
+
+        padding: 25px 12px;
+
+        align-items: center;
+    }
+
+    .brand {
+        padding: 0;
+    }
+
+    .brand-name {
+        display: none;
+    }
+
+    .sidebar-line {
+        width: 100%;
+    }
+
+    .nav-item {
+
+        justify-content: center;
+
+        padding: 14px;
+    }
+
+    .nav-item span:last-child {
+        display: none;
+    }
+
+    .nav-icon {
+        font-size: 21px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .top-header {
+        margin-bottom: 25px;
+    }
+
+
+    /* CAROUSEL */
+
+    .nutrition-slider {
+        height: 300px;
+    }
+
+    .nutrition-card {
+
+        width: 330px;
+
+        min-height: 240px;
+    }
+
+    .nutrition-card.prev {
+
+        transform:
+            translate(
+                calc(-50% - 255px),
+                -50%
+            )
+            scale(.70);
+
+        opacity: .35;
+    }
+
+    .nutrition-card.next {
+
+        transform:
+            translate(
+                calc(-50% + 255px),
+                -50%
+            )
+            scale(.70);
+
+        opacity: .35;
+    }
+
+    .reminder-items {
+        gap: 8px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .dashboard-container {
+
+        display: block;
+
+        padding: 10px;
+    }
+
+
+    /* -------------------------
+       SIDEBAR
+    -------------------------- */
+
+    .sidebar {
+
+        width: 100%;
+
+        min-height: auto;
+
+        height: auto;
+
+        padding: 15px;
+
+        border-radius: 22px;
+
+        margin-bottom: 15px;
+    }
+
+    .brand {
+
+        justify-content: center;
+
+        margin-bottom: 12px;
+    }
+
+    .brand-name {
+
+        display: block;
+
+        font-size: 19px;
+    }
+
+    .sidebar-line {
+        margin: 12px 0;
+    }
+
+    .sidebar-nav {
+
+        flex-direction: row;
+
+        overflow-x: auto;
+
+        gap: 5px;
+
+        scrollbar-width: none;
+    }
+
+    .sidebar-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-item {
+
+        flex-direction: column;
+
+        gap: 4px;
+
+        min-width: 75px;
+
+        padding: 9px 7px;
+
+        font-size: 9px;
+
+        flex-shrink: 0;
+    }
+
+    .nav-item span:last-child {
+        display: block;
+    }
+
+    .nav-icon {
+        font-size: 17px;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+
+    /* -------------------------
+       HEADER
+    -------------------------- */
+
+    .main-content {
+        padding: 5px;
+    }
+
+    .top-header {
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .welcome-small {
+        font-size: 13px;
+    }
+
+    .welcome-section h1 {
+        font-size: 27px;
+    }
+
+    .profile-section {
+        gap: 8px;
+    }
+
+    .notification-button {
+
+        width: 40px;
+        height: 40px;
+
+        border-radius: 13px;
+
+        font-size: 16px;
+    }
+
+    .profile-picture {
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 15px;
+    }
+
+    .profile-info {
+        display: none;
+    }
+
+
+    /* -------------------------
+       NUTRITION GUIDE
+    -------------------------- */
+
+    .nutrition-guide {
+
+        padding: 20px 15px;
+
+        border-radius: 23px;
+    }
+
+    .guide-header {
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .guide-header h2 {
+        font-size: 20px;
+    }
+
+    .guide-header p {
+
+        font-size: 12px;
+
+        line-height: 1.5;
+    }
+
+    .auto-status {
+
+        font-size: 10px;
+
+        padding: 7px 11px;
+    }
+
+
+    /* MOBILE CAROUSEL */
+
+    .nutrition-slider {
+
+        height: 280px;
+
+        overflow: hidden;
+    }
+
+    .nutrition-card {
+
+        width: 270px;
+
+        min-height: 225px;
+
+        padding: 20px;
+    }
+
+    /*
+       On mobile we keep the side cards visible,
+       but make them smaller so the main card
+       remains the focus.
+    */
+
+    .nutrition-card.prev {
+
+        transform:
+            translate(
+                calc(-50% - 205px),
+                -50%
+            )
+            scale(.65);
+
+        opacity: .28;
+    }
+
+    .nutrition-card.next {
+
+        transform:
+            translate(
+                calc(-50% + 205px),
+                -50%
+            )
+            scale(.65);
+
+        opacity: .28;
+    }
+
+    .nutrition-card.hidden-left {
+
+        transform:
+            translate(
+                calc(-50% - 420px),
+                -50%
+            )
+            scale(.55);
+
+        opacity: 0;
+    }
+
+    .nutrition-card.hidden-right {
+
+        transform:
+            translate(
+                calc(-50% + 420px),
+                -50%
+            )
+            scale(.55);
+
+        opacity: 0;
+    }
+
+
+    /* -------------------------
+       LOWER CARDS
+    -------------------------- */
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .dashboard-card {
+
+        padding: 20px;
+
+        border-radius: 23px;
+    }
+
+    .dashboard-card-heading h2 {
+        font-size: 18px;
+    }
+
+    .meal-row {
+
+        grid-template-columns:
+            34px 1fr auto;
+    }
+
+
+    /* -------------------------
+       REMINDERS
+    -------------------------- */
+
+    .reminder-card {
+
+        padding: 20px;
+
+        border-radius: 22px;
+    }
+
+    .reminder-items {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+    }
+
+    .reminder-item {
+        width: 100%;
+    }
+
+    .reminder-status {
+        width: 100%;
+    }
+
+
+    /* -------------------------
+       FOOTER
+    -------------------------- */
+
+    footer {
+
+        flex-direction: column;
+
+        gap: 5px;
+
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .brand-name {
+        font-size: 17px;
+    }
+
+    .nav-item {
+        min-width: 68px;
+    }
+
+    .welcome-section h1 {
+        font-size: 24px;
+    }
+
+
+    /* Smaller carousel */
+
+    .nutrition-slider {
+        height: 260px;
+    }
+
+    .nutrition-card {
+
+        width: 245px;
+
+        min-height: 215px;
+    }
+
+    .nutrition-card.prev {
+
+        transform:
+            translate(
+                calc(-50% - 180px),
+                -50%
+            )
+            scale(.58);
+
+        opacity: .25;
+    }
+
+    .nutrition-card.next {
+
+        transform:
+            translate(
+                calc(-50% + 180px),
+                -50%
+            )
+            scale(.58);
+
+        opacity: .25;
+    }
+
+    .guide-header h2 {
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   REDUCE MOTION FOR ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
