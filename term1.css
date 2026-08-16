@@ -1,0 +1,577 @@
+/* =========================================================
+   HEALTHYNUTRITION - TERMS & CONDITIONS
+========================================================= */
+
+:root {
+
+    --primary: #e889a8;
+    --primary-dark: #d86f92;
+
+    --background: #fff8fb;
+
+    --card: #ffffff;
+
+    --text-dark: #40363b;
+    --text-light: #81757b;
+
+    --border: #eadde3;
+
+    --shadow:
+        0 10px 30px rgba(130, 90, 110, 0.08);
+
+}
+
+
+/* =========================================================
+   1. RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family:
+        "Poppins",
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8fb,
+            #fffdf8
+        );
+
+    color: var(--text-dark);
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   2. MAIN CONTAINER
+========================================================= */
+
+.terms-container {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding:
+        30px
+        30px
+        50px;
+
+}
+
+
+/* =========================================================
+   3. HEADER
+========================================================= */
+
+.terms-header {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* Back button */
+
+.back-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    padding:
+        9px
+        15px;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    color: var(--primary-dark);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.back-button:hover {
+
+    background: #fff0f5;
+
+    transform:
+        translateX(-3px);
+
+}
+
+
+/* Page title */
+
+.terms-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.title-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe1eb,
+            #e9f7ed
+        );
+
+    font-size: 27px;
+
+}
+
+
+.terms-title h1 {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    margin-bottom: 4px;
+
+}
+
+
+.terms-title p {
+
+    color: var(--text-light);
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   4. TERMS CARDS
+========================================================= */
+
+.terms-card {
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    margin-bottom: 20px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+/* Intro card */
+
+.intro-card {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+}
+
+
+/* =========================================================
+   5. SECTION HEADING
+========================================================= */
+
+.section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.section-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #fff1f6;
+
+    font-size: 21px;
+
+}
+
+
+.terms-card h2 {
+
+    font-size: 18px;
+
+    font-weight: 650;
+
+    margin-bottom: 5px;
+
+}
+
+
+.section-heading p {
+
+    color: var(--text-light);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   6. TEXT
+========================================================= */
+
+.terms-card > div > p,
+.terms-card > p {
+
+    color: #655b60;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+.terms-card > p + p {
+
+    margin-top: 14px;
+
+}
+
+
+/* =========================================================
+   7. LIST
+========================================================= */
+
+.terms-card ul {
+
+    margin-top: 15px;
+
+    padding-left: 23px;
+
+}
+
+
+.terms-card li {
+
+    color: #655b60;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+    padding-left: 5px;
+
+}
+
+
+/* =========================================================
+   8. IMPORTANT HEALTH NOTICE
+========================================================= */
+
+.important-card {
+
+    border:
+        1px solid #f1d6df;
+
+}
+
+
+.notice-box {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin:
+        20px 0;
+
+    padding:
+        16px 18px;
+
+    border-radius: 13px;
+
+    background: #fff8e9;
+
+    border: 1px solid #f1dfb7;
+
+    color: #806b43;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+.notice-box:first-letter {
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================================
+   9. CONTACT BUTTON
+========================================================= */
+
+.contact-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 18px;
+
+    padding:
+        11px
+        18px;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 7px 18px
+        rgba(216, 111, 146, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.contact-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 22px
+        rgba(216, 111, 146, 0.25);
+
+}
+
+
+/* =========================================================
+   10. FOOTER
+========================================================= */
+
+.terms-footer {
+
+    text-align: center;
+
+    padding-top: 15px;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   11. TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .terms-container {
+
+        padding:
+            25px
+            22px
+            40px;
+
+    }
+
+}
+
+
+/* =========================================================
+   12. MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .terms-container {
+
+        padding:
+            20px
+            15px
+            35px;
+
+    }
+
+
+    .terms-title h1 {
+
+        font-size: 23px;
+
+    }
+
+
+    .terms-title p {
+
+        font-size: 12px;
+
+    }
+
+
+    .title-icon {
+
+        width: 50px;
+
+        height: 50px;
+
+        font-size: 23px;
+
+    }
+
+
+    .terms-card {
+
+        padding: 20px;
+
+        border-radius: 17px;
+
+    }
+
+
+    .intro-card {
+
+        flex-direction: column;
+
+    }
+
+
+    .section-heading {
+
+        align-items: flex-start;
+
+    }
+
+
+    .terms-card h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .terms-card > p,
+    .terms-card li {
+
+        font-size: 13px;
+
+    }
+
+
+    .notice-box {
+
+        font-size: 12px;
+
+        padding: 14px;
+
+    }
+
+
+    .contact-button {
+
+        width: 100%;
+
+    }
+
+}

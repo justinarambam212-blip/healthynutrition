@@ -1,0 +1,495 @@
+/* =========================================================
+   HEALTHYNUTRITION - PRIVACY PAGE
+========================================================= */
+
+:root {
+
+    --primary: #e889a8;
+    --primary-dark: #d86f92;
+
+    --background: #fff8fb;
+
+    --card: #ffffff;
+
+    --text-dark: #40363b;
+    --text-light: #81757b;
+
+    --border: #eadde3;
+
+    --shadow:
+        0 10px 30px rgba(130, 90, 110, 0.08);
+
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family:
+        "Poppins",
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8fb,
+            #fffdf8
+        );
+
+    color: var(--text-dark);
+
+    min-height: 100vh;
+
+}
+
+
+.privacy-container {
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding:
+        30px
+        30px
+        50px;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.privacy-header {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.back-button {
+
+    display: inline-flex;
+
+    width: fit-content;
+
+    padding:
+        9px 15px;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    color: var(--primary-dark);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s ease;
+
+}
+
+
+.back-button:hover {
+
+    background: #fff0f5;
+
+    transform:
+        translateX(-3px);
+
+}
+
+
+.privacy-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.title-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe1eb,
+            #e9f7ed
+        );
+
+    font-size: 27px;
+
+}
+
+
+.privacy-title h1 {
+
+    font-size: 28px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.privacy-title p {
+
+    color: var(--text-light);
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.privacy-card {
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    margin-bottom: 20px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.intro-card {
+
+    display: flex;
+
+    gap: 18px;
+
+    align-items: flex-start;
+
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.section-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #fff1f6;
+
+    font-size: 21px;
+
+}
+
+
+.privacy-card h2 {
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.section-heading p {
+
+    color: var(--text-light);
+
+    font-size: 12px;
+
+}
+
+
+.privacy-card > p {
+
+    color: #655b60;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.privacy-card ul {
+
+    margin-top: 15px;
+
+    padding-left: 22px;
+
+}
+
+
+.privacy-card li {
+
+    color: #655b60;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+    padding-left: 5px;
+
+}
+
+
+/* =========================================================
+   SECURITY NOTE
+========================================================= */
+
+.security-note {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
+    background: #f2faf4;
+
+    border: 1px solid #d9edde;
+
+    color: #55735e;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   SETTINGS BUTTON
+========================================================= */
+
+.settings-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-top: 18px;
+
+    padding:
+        11px 17px;
+
+    border-radius: 11px;
+
+    background: #fff1f6;
+
+    color: var(--primary-dark);
+
+    border: 1px solid #f1d3de;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.25s ease;
+
+}
+
+
+.settings-button:hover {
+
+    background: #ffe4ed;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+========================================================= */
+
+.delete-button {
+
+    margin-top: 18px;
+
+    padding:
+        11px 17px;
+
+    border-radius: 11px;
+
+    border: 1px solid #f0cbd4;
+
+    background: #fff6f7;
+
+    color: #c45d70;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+}
+
+
+.delete-button:hover {
+
+    background: #ffecef;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.privacy-footer {
+
+    text-align: center;
+
+    padding-top: 15px;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .privacy-container {
+
+        padding:
+            20px
+            15px
+            35px;
+
+    }
+
+
+    .privacy-title h1 {
+
+        font-size: 23px;
+
+    }
+
+
+    .privacy-title p {
+
+        font-size: 12px;
+
+    }
+
+
+    .privacy-card {
+
+        padding: 20px;
+
+        border-radius: 17px;
+
+    }
+
+
+    .intro-card {
+
+        flex-direction: column;
+
+    }
+
+
+    .privacy-card h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .privacy-card > p,
+    .privacy-card li {
+
+        font-size: 13px;
+
+    }
+
+}
