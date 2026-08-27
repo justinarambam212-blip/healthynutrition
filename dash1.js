@@ -787,7 +787,148 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+/* =====================================================
+   TODAY'S MEALS
+   TEMPORARY PERSONALIZED DATA
+===================================================== */
 
+const mealPlans = {
+
+    "client-001": {
+        breakfast: {
+            icon: "🌅",
+            food: "Oatmeal & fruits",
+            time: "8:00 AM"
+        },
+
+        lunch: {
+            icon: "🥗",
+            food: "Rice, vegetables & chicken",
+            time: "1:00 PM"
+        },
+
+        snack: {
+            icon: "🍎",
+            food: "Fruits & yogurt",
+            time: "4:30 PM"
+        },
+
+        dinner: {
+            icon: "🌙",
+            food: "Balanced protein meal",
+            time: "8:00 PM"
+        }
+    },
+
+
+    "client-002": {
+        breakfast: {
+            icon: "🥚",
+            food: "Eggs, toast & banana",
+            time: "7:30 AM"
+        },
+
+        lunch: {
+            icon: "🍚",
+            food: "Rice, dal & vegetables",
+            time: "12:30 PM"
+        },
+
+        snack: {
+            icon: "🥛",
+            food: "Milk, nuts & fruit",
+            time: "4:00 PM"
+        },
+
+        dinner: {
+            icon: "🍗",
+            food: "Chicken, vegetables & rice",
+            time: "7:30 PM"
+        }
+    }
+
+};
+
+
+function updateTodaysMeals(mealPlan) {
+
+    if (!mealPlan) {
+        return;
+    }
+
+    const mealRows =
+        document.querySelectorAll(".meal-row");
+
+
+    const meals = [
+        mealPlan.breakfast,
+        mealPlan.lunch,
+        mealPlan.snack,
+        mealPlan.dinner
+    ];
+
+
+    mealRows.forEach((row, index) => {
+
+        const meal = meals[index];
+
+        if (!meal) {
+            return;
+        }
+
+
+        // Change icon
+
+        const icon =
+            row.querySelector(".meal-icon");
+
+        if (icon) {
+            icon.textContent = meal.icon;
+        }
+
+
+        // Change food description
+
+        const food =
+            row.querySelector("small");
+
+        if (food) {
+            food.textContent = meal.food;
+        }
+
+
+        // Change time
+
+        const time =
+            row.querySelector("time");
+
+        if (time) {
+            time.textContent = meal.time;
+        }
+
+    });
+
+}
+
+
+/*
+    TEMPORARY CLIENT ID
+
+    This is ONLY for testing.
+
+    Later this will come from
+    your backend after login.
+*/
+
+const clientId =
+    localStorage.getItem("clientId") || "client-001";
+
+
+const clientMealPlan =
+    mealPlans[clientId];
+
+
+updateTodaysMeals(clientMealPlan);
     /* =====================================================
        11. EXAMPLE PERSONALIZED DATA
        
@@ -993,6 +1134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     }
+    
 
 
 
