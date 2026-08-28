@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment | HealthyNutrition</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     
+
+    <link rel="stylesheet" href="aappointment.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="appointment-header">
+
+        <div class="logo">
+            <a href="dashboard.html">
+                HealthyNutrition
+            </a>
+        </div>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="appointment-container">
+
+        <section class="appointment-card">
+
+            <div class="appointment-title">
+
+                <span class="appointment-icon"><i class="fa-regular fa-calendar-check" style="color: rgb(24, 33, 94);"></i></i></span>
+
+                <div>
+                    <h1>Book an Appointment</h1>
+
+                    <p>
+                        Schedule a consultation with our nutrition expert.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 APPOINTMENT FORM
+            ========================== -->
+
+            <form id="appointmentForm">
+
+
+                <!-- Client Name -->
+
+                <div class="form-group">
+
+                    <label for="clientName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="clientName"
+                        name="clientName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Appointment Type -->
+
+                <div class="form-group">
+
+                    <label for="appointmentType">
+                        Appointment Type
+                    </label>
+
+                    <select
+                        id="appointmentType"
+                        name="appointmentType"
+                        required
+                    >
+
+                        <option value="">
+                            Select appointment type
+                        </option>
+
+                        <option value="initial">
+                            First Consultation
+                        </option>
+
+                        <option value="followup">
+                            Follow-up Consultation
+                        </option>
+
+                        <option value="child">
+                            Child Nutrition Consultation
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Dietitian -->
+
+                <!-- <div class="form-group">
+
+                    <label for="dietitian">
+                        Choose Nutrition Expert
+                    </label>
+
+                    <select
+                        id="dietitian"
+                        name="dietitian"
+                        required
+                    >
+
+                        <option value="">
+                            Select an expert
+                        </option>
+
+                        <option value="expert1">
+                            Nutrition Expert 1
+                        </option>
+
+                        <option value="expert2">
+                            Nutrition Expert 2
+                        </option>
+
+                        <option value="expert3">
+                            Nutrition Expert 3
+                        </option>
+
+                    </select>
+
+                </div>
+ -->
+
+                <!-- Date -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="appointmentDate">
+                            Preferred Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="appointmentDate"
+                            name="appointmentDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Time -->
+
+                    <div class="form-group">
+
+                        <label for="appointmentTime">
+                            Preferred Time
+                        </label>
+
+                        <select
+                            id="appointmentTime"
+                            name="appointmentTime"
+                            required
+                        >
+
+                            <option value="">
+                                Select time
+                            </option>
+
+                            <option value="09:00">
+                                9:00 AM
+                            </option>
+
+                            <option value="10:00">
+                                10:00 AM
+                            </option>
+
+                            <option value="11:00">
+                                11:00 AM
+                            </option>
+
+                            <option value="12:00">
+                                12:00 PM
+                            </option>
+
+                            <option value="14:00">
+                                2:00 PM
+                            </option>
+
+                            <option value="15:00">
+                                3:00 PM
+                            </option>
+
+                            <option value="16:00">
+                                4:00 PM
+                            </option>
+
+                            <option value="17:00">
+                                5:00 PM
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Consultation Mode -->
+
+                <div class="form-group">
+
+                    <label>
+                        Consultation Mode
+                    </label>
+
+                    <div class="mode-options">
+
+                        <label class="mode-option">
+
+                            <input
+                                type="radio"
+                                name="mode"
+                                value="online"
+                                required
+                            >
+
+                            <span>
+                                <i class="fa-solid fa-video" style="color: rgb(49, 9, 9);"></i> Online
+                            </span>
+
+                        </label>
+
+
+                        <label class="mode-option">
+
+                            <input
+                                type="radio"
+                                name="mode"
+                                value="in-person"
+                            >
+
+                            <span>
+                                <i class="fa-solid fa-handshake" style="color: rgb(154, 35, 35);"></i> In Person
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Reason -->
+
+                <div class="form-group">
+
+                    <label for="reason">
+                        Reason for Appointment (Optional)
+                    </label>
+
+                    <textarea
+                        id="reason"
+                        name="reason"
+                        rows="4"
+                        placeholder="Briefly tell us what you need help with..."
+                       
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Terms -->
+
+                <div class="agreement">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="agreement"
+                            required
+                        >
+
+                        I confirm that the information provided
+                        is correct.
+
+                    </label>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="book-btn"
+                >
+                    Book Appointment
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- =========================
+             APPOINTMENT INFORMATION
+        ========================== -->
+<!-- =========================
+     APPOINTMENT CALENDAR
+========================== -->
+
+<aside class="appointment-info">
+
+    <div class="info-board-header">
+
+        <span class="info-board-icon"><i class="fa-regular fa-calendar-days"></i></span>
+
+        <div>
+            <h2>Appointment Calendar</h2>
+            <p>Check available dates</p>
+        </div>
+
+    </div>
+
+
+    <!-- Calendar Header -->
+
+    <div class="calendar-header">
+
+        <button type="button" id="prevMonth">
+            ‹
+        </button>
+
+        <h3 id="calendarMonth">
+            August 2026
+        </h3>
+
+        <button type="button" id="nextMonth">
+            ›
+        </button>
+
+    </div>
+
+
+    <!-- Days of Week -->
+
+    <div class="calendar-weekdays">
+
+        <span>Sun</span>
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+
+    </div>
+
+
+    <!-- Calendar Dates -->
+
+    <div
+        class="calendar-days"
+        id="calendarDays">
+    </div>
+
+
+    <!-- Legend -->
+
+    <div class="calendar-legend">
+
+        <div>
+            <span class="legend-box booked"></span>
+            Booked
+        </div>
+
+        <div>
+            <span class="legend-box available"></span>
+            Available
+        </div>
+
+        <div>
+            <span class="legend-box selected"></span>
+            Selected
+        </div>
+
+    </div>
+
+
+    <!-- Selected Date -->
+
+    <div class="selected-date-display">
+
+        <strong>Selected Date</strong>
+
+        <p id="selectedDateText">
+            Please select a date
+        </p>
+
+    </div>
+
+</aside>
+
+    </main>
+ 
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="appointment.js"></script>
+
+</body>
+
+</html>

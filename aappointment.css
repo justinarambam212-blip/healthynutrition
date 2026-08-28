@@ -1,0 +1,710 @@
+/* =====================================================
+   HEALTHYNUTRITION - APPOINTMENT PAGE
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7faf8;
+    color: #26352d;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.appointment-header {
+    width: 100%;
+    padding: 20px 6%;
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #e5ebe7;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #2f6f4e;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #2f6f4e;
+    font-size: 15px;
+    font-weight: 600;
+
+    padding: 10px 18px;
+    border: 1px solid #2f6f4e;
+    border-radius: 8px;
+
+    transition: 0.25s ease;
+}
+
+.back-btn:hover {
+    background: #2f6f4e;
+    color: white;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.appointment-container {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+/* =====================================================
+   APPOINTMENT CARD
+===================================================== */
+
+.appointment-card {
+    background: #ffffff;
+
+    padding: 35px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.appointment-title {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #e8eee9;
+}
+
+.appointment-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf5ee;
+
+    border-radius: 12px;
+
+    font-size: 27px;
+}
+
+.appointment-title h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+    color: #26352d;
+}
+
+.appointment-title p {
+    color: #718078;
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #34443b;
+}
+
+
+/* =====================================================
+   INPUTS / SELECT / TEXTAREA
+===================================================== */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d8e2dc;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #26352d;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4d936b;
+
+    box-shadow:
+        0 0 0 3px rgba(77, 147, 107, 0.12);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+
+/* =====================================================
+   DATE + TIME ROW
+===================================================== */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   CONSULTATION MODE
+===================================================== */
+
+.mode-options {
+    display: flex;
+    gap: 15px;
+}
+
+.mode-option {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 13px 15px;
+
+    border: 1px solid #d8e2dc;
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.mode-option:hover {
+    background: #f4faf6;
+    border-color: #72a98a;
+}
+
+.mode-option input {
+    width: auto;
+    cursor: pointer;
+}
+
+.mode-option span {
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   AGREEMENT
+===================================================== */
+
+.agreement {
+    margin: 10px 0 22px;
+
+    font-size: 13px;
+    color: #68766e;
+}
+
+.agreement label {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 9px;
+
+    cursor: pointer;
+}
+
+.agreement input {
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   BOOK BUTTON
+===================================================== */
+
+.book-btn {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2f6f4e;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.2s ease;
+}
+
+.book-btn:hover {
+    background: #245b3e;
+
+    transform: translateY(-1px);
+}
+
+.book-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   INFORMATION PANEL
+===================================================== */
+/* =====================================================
+   APPOINTMENT CALENDAR
+===================================================== */
+
+.appointment-info {
+    background: #eaf5ee;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    position: sticky;
+    top: 25px;
+}
+
+
+/* =====================================================
+   CALENDAR HEADER
+===================================================== */
+
+.info-board-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #cfe1d6;
+}
+
+.info-board-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+
+    border-radius: 10px;
+
+    font-size: 22px;
+}
+
+.info-board-header h2 {
+    margin: 0;
+
+    font-size: 21px;
+
+    color: #285c41;
+}
+
+.info-board-header p {
+    margin-top: 3px;
+
+    font-size: 13px;
+
+    color: #65766c;
+}
+
+
+/* =====================================================
+   MONTH NAVIGATION
+===================================================== */
+
+.calendar-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 22px 0 15px;
+}
+
+.calendar-header h3 {
+    font-size: 17px;
+
+    color: #285c41;
+}
+
+.calendar-header button {
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #285c41;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.calendar-header button:hover {
+    background: #d9ebdf;
+}
+
+
+/* =====================================================
+   WEEK DAYS
+===================================================== */
+
+.calendar-weekdays {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 5px;
+
+    margin-bottom: 7px;
+
+    text-align: center;
+}
+
+.calendar-weekdays span {
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: #6d7c73;
+}
+
+
+/* =====================================================
+   CALENDAR DAYS
+===================================================== */
+
+.calendar-days {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 6px;
+}
+
+
+/* Individual date */
+
+.calendar-day {
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #34443b;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    border: 1px solid transparent;
+
+    transition: 0.2s ease;
+}
+
+
+/* Empty calendar space */
+
+.calendar-day.empty {
+    background: transparent;
+
+    cursor: default;
+}
+
+
+/* Hover */
+
+.calendar-day:not(.empty):hover {
+    border-color: #4d936b;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   BOOKED DATE
+===================================================== */
+
+.calendar-day.booked {
+    background: #f5b5b5;
+
+    color: #9b2f2f;
+
+    cursor: not-allowed;
+}
+
+.calendar-day.booked:hover {
+    border-color: transparent;
+
+    transform: none;
+}
+
+
+/* =====================================================
+   AVAILABLE DATE
+===================================================== */
+
+.calendar-day.available {
+    background: white;
+
+    color: #34443b;
+}
+
+
+/* =====================================================
+   SELECTED DATE
+===================================================== */
+
+.calendar-day.selected {
+    background: #2f6f4e;
+
+    color: white;
+
+    border-color: #2f6f4e;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   TODAY
+===================================================== */
+
+.calendar-day.today {
+    border: 2px solid #2f6f4e;
+}
+
+
+/* =====================================================
+   LEGEND
+===================================================== */
+
+.calendar-legend {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #cfe1d6;
+
+    font-size: 11px;
+
+    color: #596a60;
+}
+
+.calendar-legend div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.legend-box {
+    width: 11px;
+    height: 11px;
+
+    display: inline-block;
+
+    border-radius: 3px;
+}
+
+.legend-box.booked {
+    background: #f5b5b5;
+}
+
+.legend-box.available {
+    background: white;
+
+    border: 1px solid #d5dfd8;
+}
+
+.legend-box.selected {
+    background: #2f6f4e;
+}
+
+
+/* =====================================================
+   SELECTED DATE DISPLAY
+===================================================== */
+
+.selected-date-display {
+    margin-top: 18px;
+
+    padding: 13px;
+
+    background: white;
+
+    border-radius: 9px;
+}
+
+.selected-date-display strong {
+    font-size: 12px;
+
+    color: #596a60;
+}
+
+.selected-date-display p {
+    margin-top: 5px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #285c41;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .appointment-container {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment-info {
+        position: static;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .appointment-header {
+        padding: 16px 5%;
+    }
+
+    .logo a {
+        font-size: 20px;
+    }
+
+    .back-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .appointment-container {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .appointment-card {
+        padding: 22px;
+        border-radius: 12px;
+    }
+
+    .appointment-title h1 {
+        font-size: 22px;
+    }
+
+    .appointment-title p {
+        font-size: 13px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .mode-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .appointment-info {
+        padding: 22px;
+    }
+
+}
