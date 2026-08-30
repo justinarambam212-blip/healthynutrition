@@ -1,8 +1,8 @@
-const cors = require("cors");
 require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 
@@ -11,9 +11,18 @@ const app = express();
 const PORT = 5000;
 
 
+// CORS
+app.use(cors({
+    origin: "http://127.0.0.1:5500",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+app.options("*", cors());
+
 // Allow JSON data
 app.use(express.json());
-app.use(cors());
+
 
 // Authentication routes
 app.use("/api/auth", authRoutes);
