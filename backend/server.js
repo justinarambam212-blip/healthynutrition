@@ -15,10 +15,12 @@ const PORT = 5000;
 app.use(cors({
     origin: "http://127.0.0.1:5500",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 204
 }));
+app.use(cors());
 
-app.options("*", cors());
+
 
 // Allow JSON data
 app.use(express.json());
@@ -33,6 +35,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("MongoDB connected successfully");
     })
+
     .catch((error) => {
         console.log("MongoDB connection error:", error);
     });
