@@ -5,6 +5,42 @@ document.addEventListener("DOMContentLoaded", function () {
     const passwordInput = document.querySelector('input[type="password"]');
     const rememberMe = document.querySelector('input[type="checkbox"]');
 
+    // =========================
+    // PASSWORD VISIBILITY
+    // =========================
+
+    const togglePassword = document.getElementById("togglePassword");
+
+    if (togglePassword) {
+
+        togglePassword.addEventListener("click", function () {
+
+            if (passwordInput.type === "password") {
+
+                // Show password
+                passwordInput.type = "text";
+
+                togglePassword.classList.remove("fa-eye");
+                togglePassword.classList.add("fa-eye-slash");
+
+            } else {
+
+                // Hide password
+                passwordInput.type = "password";
+
+                togglePassword.classList.remove("fa-eye-slash");
+                togglePassword.classList.add("fa-eye");
+
+            }
+
+        });
+
+    }
+
+
+    // =========================
+    // LOGIN
+    // =========================
 
     form.addEventListener("submit", async function (event) {
 
@@ -16,7 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Check if fields are empty
         if (email === "" || password === "") {
+
             alert("Please enter your email and password.");
+
             return;
         }
 
@@ -25,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailPattern.test(email)) {
+
             alert("Please enter a valid email address.");
+
             return;
         }
 
@@ -57,7 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.ok) {
 
                 // Save authentication token
-                localStorage.setItem("token", data.token);
+                localStorage.setItem(
+                    "token",
+                    data.token
+                );
+
 
                 // Save user information
                 localStorage.setItem(
@@ -65,8 +109,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     JSON.stringify(data.user)
                 );
 
+
                 // Save login status
-                localStorage.setItem("loggedIn", "true");
+                localStorage.setItem(
+                    "loggedIn",
+                    "true"
+                );
 
 
                 // Remember email
@@ -82,13 +130,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     localStorage.removeItem(
                         "rememberedEmail"
                     );
+
                 }
 
 
                 alert("Login successful!");
 
+
                 // Go to dashboard
                 window.location.href = "dashboard.html";
+
 
             } else {
 
@@ -96,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     data.message ||
                     "Incorrect email or password."
                 );
+
             }
 
 
@@ -107,12 +159,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Unable to connect to the server. " +
                 "Please make sure the backend is running."
             );
+
         }
 
     });
 
 
-    // Load remembered email
+    // =========================
+    // REMEMBERED EMAIL
+    // =========================
+
     const rememberedEmail =
         localStorage.getItem("rememberedEmail");
 
@@ -120,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (rememberedEmail) {
 
         emailInput.value = rememberedEmail;
+
         rememberMe.checked = true;
 
     }
