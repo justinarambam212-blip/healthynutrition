@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="cslo.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 </head>
+
 <body>
 
 <!-- Background -->
@@ -27,161 +28,158 @@
 </div>
 
 <!-- Navigation -->
-
 <header>
 
-<nav class="navbar">
+    <nav class="navbar">
 
-<div class="logo">
+        <div class="logo">
 
-<div class="logo-icon"><img src="nt.png" alt="HealthyNutrition Logo"></div>
+            <div class="logo-icon">
+                <img src="nt.png" alt="HealthyNutrition Logo">
+            </div>
 
+            <h2>HealthyNutrition</h2>
 
+        </div>
 
-<h2>HealthyNutrition</h2>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+        </ul>
 
-</div>
-
-<ul>
-
-<li><a href="index.html">Home</a></li>
-
-</ul>
-
-</nav>
+    </nav>
 
 </header>
 
 <!-- Login Section -->
-
 <section class="login-section">
 
-<!-- Left Side -->
+    <!-- Left Side -->
+    <div class="left-content">
 
-<div class="left-content">
+        <div class="badge">
 
-<div class="badge">
- 
-<i class="fa-brands fa-pagelines" style="color: rgb(253, 0, 0);">
-</i> 
-&nbsp;
-Personalized Health Platform
+            <i class="fa-brands fa-pagelines"
+               style="color: rgb(253, 0, 0);">
+            </i>
 
-</div>
+            &nbsp;
 
-<h1>
+            Personalized Health Platform
 
-Eat Better.
+        </div>
 
-<br>
+        <h1>
+            Eat Better.
+            <br>
+            <span>Live Better.</span>
+        </h1>
 
-<span>Live Better.</span>
+        <p>
+            Start your personalized nutrition journey with expert
+            dietitians.
+        </p>
 
-</h1>
+    </div>
 
-<p>
+    <!-- Right Side -->
+    <div class="login-card">
 
-Start your personalized nutrition journey with expert
-dietitians.
+        <h2>Welcome Back</h2>
 
-</p>
-</div>
+        <p>
+            Login to continue your healthy journey.
+        </p>
 
-<!-- Right Side -->
+        <form>
 
-<div class="login-card">
+            <!-- Email -->
+            <div class="input-group">
 
-<h2>
+                <label>Email Address</label>
 
-Welcome Back </h2>
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required>
 
-<p>
+            </div>
 
-Login to continue your healthy journey.
+            <!-- Password -->
+            <div class="input-group">
 
-</p>
+                <label>Password</label>
 
-<form>
+                <input
+                    type="password"
+                    placeholder="Enter password"
+                    required>
 
-<div class="input-group">
+            </div>
 
-<label>Email Address</label>
+            <!-- Remember / Forgot -->
+            <div class="row">
 
-<input
-type="email"
-placeholder="Enter your email">
+                <label>
 
-</div>
+                    <input type="checkbox">
 
-<div class="input-group">
+                    Remember Me
 
-<label>Password</label>
+                </label>
 
-<input
-type="password"
-placeholder="Enter password">
+                <a href="#">
+                    Forgot Password?
+                </a>
 
-</div>
+            </div>
 
-<div class="row">
+            <!-- Login Button -->
+            <button type="submit" class="login-btn">
+                Login
+            </button>
 
-<label>
+            <!-- Divider -->
+            <div class="divider">
 
-<input type="checkbox">
+                <span>OR</span>
 
-Remember Me
+            </div>
 
-</label>
+            <!-- Google Button -->
+            <button
+                type="button"
+                class="google-btn">
 
-<a href="#">
+                <img
+                    src="https://www.svgrepo.com/show/475656/google-color.svg"
+                    width="22"
+                    alt="Google">
 
-Forgot Password?
+                Continue with Google
 
-</a>
+            </button>
 
-</div>
+            <!-- Create Account -->
+            <p class="signup">
 
-<!-- <button class="login-btn" onclick="window.location.href='dashboard.html'">
-Login 
-</button> java script happpa kaonu ko cda su-->
-<button type="button" class="login-btn" onclick="window.location.href='dashboard.html'">
-    Login
-</button>
-<div class="divider">
+                Don't have an account?
 
-<span>OR</span>
+                <a href="createacct.html">
+                    Create Account
+                </a>
 
-</div>
+            </p>
 
-<button
-type="button"
-class="google-btn">
+        </form>
 
-<img
-src="https://www.svgrepo.com/show/475656/google-color.svg"
-width="22">
-
-Continue with Google
-
-</button>
-
-<p class="signup">
-
-Don't have an account?
-
-<a href="createacct.html">
-
-Create Account
-
-</a>
-
-</p>
-
-</form>
-
-</div>
+    </div>
 
 </section>
+
+<!-- JavaScript -->
+<script src="loginJs.js"></script>
 
 </body>
 </html>
