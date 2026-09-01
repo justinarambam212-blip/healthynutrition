@@ -3,7 +3,60 @@
    COMPLETE JAVASCRIPT
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+    // ==============================
+    // AUTHENTICATION CHECK
+    // ==============================
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/auth/protected",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            }
+        );
+
+        if (!response.ok) {
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            localStorage.removeItem("loggedIn");
+
+            window.location.href = "login.html";
+
+            return;
+        }
+
+        const data = await response.json();
+
+        console.log("Authenticated user:", data.user);
+
+    } catch (error) {
+
+        console.error(
+            "Authentication check failed:",
+            error
+        );
+
+        alert(
+            "Unable to connect to the server. " +
+            "Please make sure the backend is running."
+        );
+
+        return;
+    }
 
 
     /* =====================================================
@@ -1137,7 +1190,29 @@ updateTodaysMeals(clientMealPlan);
     
 
 
+const logoutBtn = document.getElementById("logoutBtn");
 
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        const confirmLogout = confirm(
+            "Are you sure you want to log out?"
+        );
+
+        if (!confirmLogout) {
+            return;
+        }
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("loggedIn");
+
+        window.location.href = "login.html";
+    });
+}
     /* =====================================================
        16. EXPOSE FUNCTIONS
        
