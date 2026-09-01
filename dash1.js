@@ -39,9 +39,25 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        const data = await response.json();
+      const data = await response.json();
+const loggedInUser = data.user;
 
-        console.log("Authenticated user:", data.user);
+console.log("Authenticated user:", loggedInUser);
+// Update user's name on the dashboard
+const userNameElements = document.querySelectorAll(
+    "#userName, .user-name"
+);
+
+userNameElements.forEach(element => {
+    element.textContent = loggedInUser.name;
+});
+// Update profile picture with user's first initial
+const profilePicture = document.getElementById("profilePicture");
+
+if (profilePicture && loggedInUser.name) {
+    profilePicture.textContent =
+        loggedInUser.name.charAt(0).toUpperCase();
+}
 
     } catch (error) {
 

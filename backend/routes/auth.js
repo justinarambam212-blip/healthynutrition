@@ -282,22 +282,18 @@ router.get(
 
 
             // Authentication successful
-            res.status(200).json({
+           res.status(200).json({
 
-                message:
-                    "You have access to this protected route",
+    message: "User authenticated successfully",
 
-                user: {
+    user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        createdAt: user.createdAt
+    }
 
-                    id: user._id,
-
-                    name: user.name,
-
-                    email: user.email
-
-                }
-
-            });
+});
 
         } catch (error) {
 
