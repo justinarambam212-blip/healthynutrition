@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 const appointmentRoutes = require("./routes/appointments");
+const paymentRoutes = require("./routes/payment");
 
 const app = express();
 
@@ -43,7 +44,7 @@ app.use("/api/auth", authRoutes);
 
 app.use("/api/appointments", appointmentRoutes);
 
-
+app.use("/api/payment", paymentRoutes);
 // ======================================================
 // TEST ROUTE
 // ======================================================

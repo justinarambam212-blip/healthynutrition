@@ -1149,110 +1149,239 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       17. APPOINTMENT FORM SUBMISSION
-    ===================================================== */
+   17. APPOINTMENT FORM SUBMISSION + RAZORPAY PAYMENT
+===================================================== */
 
-    const appointmentForm =
-        document.getElementById(
-            "appointmentForm"
-        );
-
-
-    if (appointmentForm) {
-
-        appointmentForm.addEventListener(
-            "submit",
-            async function (event) {
+const appointmentForm =
+    document.getElementById(
+        "appointmentForm"
+    );
 
 
-                /*
-                   Prevent page refresh.
-                */
+if (appointmentForm) {
 
-                event.preventDefault();
+    appointmentForm.addEventListener(
+        "submit",
+        async function (event) {
 
 
-                console.log(
-                    "APPOINTMENT FORM SUBMITTED"
+            /*
+               Prevent page refresh.
+            */
+
+            event.preventDefault();
+
+
+            console.log(
+                "APPOINTMENT FORM SUBMITTED"
+            );
+
+
+            /* =========================================
+               GET FORM VALUES
+            ========================================= */
+
+            const phone =
+                document
+                    .getElementById("phone")
+                    .value
+                    .trim();
+
+
+            const appointmentType =
+                document
+                    .getElementById(
+                        "appointmentType"
+                    )
+                    .value;
+
+
+            const selectedAppointmentDate =
+                document
+                    .getElementById(
+                        "appointmentDate"
+                    )
+                    .value;
+
+
+            const appointmentTime =
+                document
+                    .getElementById(
+                        "appointmentTime"
+                    )
+                    .value;
+
+
+            const selectedMode =
+                document.querySelector(
+                    'input[name="mode"]:checked'
                 );
 
 
-
-                /* =========================================
-                   GET FORM VALUES
-                ========================================= */
-
-                const phone =
-                    document
-                        .getElementById("phone")
-                        .value
-                        .trim();
+            const mode =
+                selectedMode
+                    ? selectedMode.value
+                    : "";
 
 
-                const appointmentType =
-                    document
-                        .getElementById(
-                            "appointmentType"
-                        )
-                        .value;
+            const reason =
+                document
+                    .getElementById("reason")
+                    .value
+                    .trim();
 
 
-                const selectedAppointmentDate =
-                    document
-                        .getElementById(
-                            "appointmentDate"
-                        )
-                        .value;
+            /* =========================================
+               VALIDATION
+            ========================================= */
+
+            if (
+
+                !phone ||
+
+                !appointmentType ||
+
+                !selectedAppointmentDate ||
+
+                !appointmentTime ||
+
+                !mode
+
+            ) {
+
+                alert(
+                    "Please fill in all required appointment details."
+                );
+
+                return;
+
+            }
 
 
-                const appointmentTime =
-                    document
-                        .getElementById(
-                            "appointmentTime"
-                        )
-                        .value;
+            /* =========================================
+               CHECK LOGIN TOKEN
+            ========================================= */
+
+            const token =
+                localStorage.getItem(
+                    "token"
+                );
 
 
-                const selectedMode =
-                    document.querySelector(
-                        'input[name="mode"]:checked'
+            if (!token) {
+
+                alert(
+                    "Please log in before booking an appointment."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================================
+               CREATE APPOINTMENT DATA
+            ========================================= */
+
+            const appointmentData = {
+
+                phone:
+                    phone,
+
+                appointmentType:
+                    appointmentType,
+
+                appointmentDate:
+                    selectedAppointmentDate,
+
+                appointmentTime:
+                    appointmentTime,
+
+                mode:
+                    mode,
+
+                reason:
+                    reason
+
+            };
+
+
+            /* =========================================
+               GET BOOK BUTTON
+            ========================================= */
+
+            const bookButton =
+                appointmentForm.querySelector(
+                    ".book-btn"
+                );
+
+
+            if (bookButton) {
+
+                bookButton.disabled =
+                    true;
+
+
+                bookButton.textContent =
+                    "Preparing Payment...";
+
+            }
+
+
+            try {
+
+
+                /* =====================================
+                   STEP 1
+                   CREATE RAZORPAY ORDER
+                ===================================== */
+
+                const paymentResponse =
+                    await fetch(
+                        "http://localhost:5000/api/payment/create-order",
+                        {
+
+                            method:
+                                "POST",
+
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+
+                            body:
+                                JSON.stringify({
+
+                                    amount: 500
+
+                                })
+
+                        }
                     );
 
 
-                const mode =
-                    selectedMode
-                        ? selectedMode.value
-                        : "";
+                const paymentData =
+                    await paymentResponse.json();
 
 
-                const reason =
-                    document
-                        .getElementById("reason")
-                        .value
-                        .trim();
+                console.log(
+                    "Razorpay order response:",
+                    paymentData
+                );
 
 
-
-                /* =========================================
-                   VALIDATION
-                ========================================= */
-
-                if (
-
-                    !phone ||
-
-                    !appointmentType ||
-
-                    !selectedAppointmentDate ||
-
-                    !appointmentTime ||
-
-                    !mode
-
-                ) {
+                if (!paymentResponse.ok) {
 
                     alert(
-                        "Please fill in all required appointment details."
+
+                        paymentData.message ||
+
+                        "Unable to initialize payment."
+
                     );
 
                     return;
@@ -1260,280 +1389,331 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
+                /* =====================================
+                   STEP 2
+                   CONFIGURE RAZORPAY CHECKOUT
+                ===================================== */
 
-                /* =========================================
-                   CHECK LOGIN TOKEN
-                ========================================= */
+                const options = {
 
-                const token =
-                    localStorage.getItem(
-                        "token"
-                    );
-
-
-                if (!token) {
-
-                    alert(
-                        "Please log in before booking an appointment."
-                    );
-
-                    return;
-
-                }
+                    key:
+                        paymentData.key,
 
 
+                    amount:
+                        paymentData.order.amount,
 
-                /* =========================================
-                   CREATE APPOINTMENT DATA
-                ========================================= */
 
-                const appointmentData = {
+                    currency:
+                        paymentData.order.currency,
 
-                    phone:
-                        phone,
 
-                    appointmentType:
-                        appointmentType,
+                    name:
+                        "HealthyNutrition",
 
-                    appointmentDate:
-                        selectedAppointmentDate,
 
-                    appointmentTime:
-                        appointmentTime,
+                    description:
+                        "Nutrition Consultation Appointment",
 
-                    mode:
-                        mode,
 
-                    reason:
-                        reason
+                    order_id:
+                        paymentData.order.id,
+
+
+                    handler:
+                        async function (
+                            paymentResult
+                        ) {
+
+
+                            console.log(
+                                "Payment successful:",
+                                paymentResult
+                            );
+
+
+                            /*
+                               Payment completed.
+
+                               Now save appointment
+                               in MongoDB.
+                            */
+
+
+                            if (bookButton) {
+
+                                bookButton.textContent =
+                                    "Booking Appointment...";
+
+                            }
+
+
+                            try {
+
+
+                                /* =====================
+                                   STEP 3
+                                   SAVE APPOINTMENT
+                                ===================== */
+
+                                const response =
+                                    await fetch(
+                                        "http://localhost:5000/api/appointments",
+                                        {
+
+                                            method:
+                                                "POST",
+
+
+                                            headers: {
+
+                                                "Content-Type":
+                                                    "application/json",
+
+
+                                                "Authorization":
+                                                    `Bearer ${token}`
+
+                                            },
+
+
+                                            body:
+                                                JSON.stringify(
+                                                    appointmentData
+                                                )
+
+                                        }
+                                    );
+
+
+                                const data =
+                                    await response.json();
+
+
+                                console.log(
+                                    "Appointment response:",
+                                    data
+                                );
+
+
+                                if (!response.ok) {
+
+                                    alert(
+
+                                        data.message ||
+
+                                        "Payment was successful, but appointment booking failed."
+
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                /* =====================
+                                   SUCCESS
+                                ===================== */
+
+                                alert(
+                                    "Payment successful! Your appointment has been booked."
+                                );
+
+
+                                console.log(
+
+                                    "Appointment saved in MongoDB:",
+
+                                    data.appointment
+
+                                );
+
+
+                                /*
+                                   Reset form.
+                                */
+
+                                appointmentForm.reset();
+
+
+                                /*
+                                   Clear date.
+                                */
+
+                                if (appointmentDate) {
+
+                                    appointmentDate.value =
+                                        "";
+
+                                }
+
+
+                                if (selectedDateText) {
+
+                                    selectedDateText.textContent =
+                                        "Please select a date";
+
+                                }
+
+
+                                /*
+                                   Remove selected date.
+                                */
+
+                                document
+                                    .querySelectorAll(
+                                        ".calendar-day.selected"
+                                    )
+                                    .forEach(
+                                        (element) => {
+
+                                            element.classList.remove(
+                                                "selected"
+                                            );
+
+                                        }
+                                    );
+
+
+                                /*
+                                   Reload calendar.
+                                */
+
+                                await loadBookedDates();
+
+
+                            }
+
+
+                            catch (error) {
+
+                                console.error(
+                                    "Appointment booking error:",
+                                    error
+                                );
+
+
+                                alert(
+                                    "Payment was successful, but there was an error saving your appointment."
+                                );
+
+                            }
+
+
+                            finally {
+
+                                if (bookButton) {
+
+                                    bookButton.disabled =
+                                        false;
+
+
+                                    bookButton.textContent =
+                                        "Book Appointment";
+
+                                }
+
+                            }
+
+                        },
+
+
+                    prefill: {
+
+                        name:
+                            "",
+
+
+                        contact:
+                            phone
+
+                    },
+
+
+                    theme: {
+
+                        color:
+                            "#2E8B57"
+
+                    },
+
+
+                    modal: {
+
+                        ondismiss:
+                            function () {
+
+                                console.log(
+                                    "Payment popup closed"
+                                );
+
+
+                                if (bookButton) {
+
+                                    bookButton.disabled =
+                                        false;
+
+
+                                    bookButton.textContent =
+                                        "Book Appointment";
+
+                                }
+
+                            }
+
+                    }
 
                 };
 
 
-                console.log(
-                    "Sending appointment:",
-                    appointmentData
+                /* =====================================
+                   STEP 3
+                   OPEN RAZORPAY POPUP
+                ===================================== */
+
+                const razorpayCheckout =
+                    new Razorpay(
+                        options
+                    );
+
+
+                razorpayCheckout.open();
+
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Payment error:",
+                    error
                 );
 
 
-
-                /* =========================================
-                   GET BOOK BUTTON
-                ========================================= */
-
-                const bookButton =
-                    appointmentForm.querySelector(
-                        ".book-btn"
-                    );
-
-
-                if (bookButton) {
-
-                    bookButton.disabled =
-                        true;
-
-
-                    bookButton.textContent =
-                        "Booking...";
-
-                }
-
-
-
-                try {
-
-
-                    /* =====================================
-                       SEND TO EXPRESS BACKEND
-                    ===================================== */
-
-                    const response =
-                        await fetch(
-                            "http://localhost:5000/api/appointments",
-                            {
-
-                                method:
-                                    "POST",
-
-
-                                headers: {
-
-                                    "Content-Type":
-                                        "application/json",
-
-
-                                    "Authorization":
-                                        `Bearer ${token}`
-
-                                },
-
-
-                                body:
-                                    JSON.stringify(
-                                        appointmentData
-                                    )
-
-                            }
-                        );
-
-
-                    const data =
-                        await response.json();
-
-
-                    console.log(
-                        "Server response:",
-                        data
-                    );
-
-
-
-                    /* =====================================
-                       HANDLE ERROR
-                    ===================================== */
-
-                    if (!response.ok) {
-
-                        alert(
-
-                            data.message ||
-
-                            "Failed to book appointment."
-
-                        );
-
-                        return;
-
-                    }
-
-
-
-                    /* =====================================
-                       SUCCESS
-                    ===================================== */
-
-                    alert(
-                        "Appointment booked successfully!"
-                    );
-
-
-                    console.log(
-
-                        "Appointment saved in MongoDB:",
-
-                        data.appointment
-
-                    );
-
-
-
-                    /*
-                       Reset form.
-                    */
-
-                    appointmentForm.reset();
-
-
-
-                    /*
-                       Clear selected date display.
-                    */
-
-                    if (appointmentDate) {
-
-                        appointmentDate.value =
-                            "";
-
-                    }
-
-
-                    if (selectedDateText) {
-
-                        selectedDateText.textContent =
-                            "Please select a date";
-
-                    }
-
-
-
-                    /*
-                       Remove selected calendar date.
-                    */
-
-                    document
-                        .querySelectorAll(
-                            ".calendar-day.selected"
-                        )
-                        .forEach(
-                            (element) => {
-
-                                element.classList.remove(
-                                    "selected"
-                                );
-
-                            }
-                        );
-
-
-
-                    /*
-                       Reload booked dates from MongoDB.
-
-                       This updates the calendar immediately
-                       after a successful booking.
-                    */
-
-                    await loadBookedDates();
-
-
-                }
-
-
-                catch (error) {
-
-                    console.error(
-                        "Appointment booking error:",
-                        error
-                    );
-
-
-                    alert(
-
-                        "Unable to connect to the server. " +
-
-                        "Please make sure the backend is running."
-
-                    );
-
-                }
-
-
-                finally {
-
-
-                    /*
-                       Restore booking button.
-                    */
-
-                    if (bookButton) {
-
-                        bookButton.disabled =
-                            false;
-
-
-                        bookButton.textContent =
-                            "Book Appointment";
-
-                    }
-
-                }
+                alert(
+                    "Unable to connect to the payment server."
+                );
 
             }
-        );
-
-    }
 
 
+            finally {
+
+
+                /*
+                   Do not immediately enable the button
+                   because Razorpay popup may still be open.
+
+                   The modal ondismiss function handles it.
+                */
+
+            }
+
+        }
+    );
+
+}
 
     /* =====================================================
        18. GLOBAL HEALTHYNUTRITION OBJECT
