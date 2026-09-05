@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Appointments</title>
+    <link rel="stylesheet" href="MyAPPOINT.css">
+</head>
+<body>
+
+    <main class="appointments-container">
+        <div class="page-header">
+            <div>
+                <p class="small-title">HealthyNutrition</p>
+                <h1>My Appointments</h1>
+                <p class="subtitle">
+                    View and manage your upcoming consultations.
+                </p>
+            </div>
+
+            <a href="appointment.html" class="book-btn">
+                Book Appointment
+            </a>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <section class="appointments-card">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Appointment Date</th>
+                            <th>Time</th>
+                            <th>Appointment Type</th>
+                            <th>Consultation Mode</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="appointmentsList">
+                        <tr>
+                            <td colspan="6" class="loading">
+                                Loading appointments...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="MyAPPOINT.js"></script>
+</body>
+</html>
