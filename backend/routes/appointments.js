@@ -267,5 +267,56 @@ router.get(
 
     }
 );
+// ======================================================
+// GET LOGGED-IN USER'S APPOINTMENTS
+// ======================================================
 
+router.get(
+    "/my-appointments",
+    authenticateToken,
+    async (req, res) => {
+
+        try {
+
+            const appointments =
+                await Appointment.find({
+
+                    user:
+                        req.user.userId
+
+                })
+                .sort({
+
+                    appointmentDate: 1,
+
+                    appointmentTime: 1
+
+                });
+
+
+            res.status(200).json({
+
+                appointments
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "Error fetching user appointments:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                message:
+                    "Unable to fetch appointments."
+
+            });
+
+        }
+
+    }
+);
 module.exports = router;
