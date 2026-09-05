@@ -13,8 +13,10 @@ const PORT = 5000;
 
 
 // ======================================================
-// CORS
+// MIDDLEWARE
 // ======================================================
+
+// CORS
 
 app.use(cors({
     origin: "http://127.0.0.1:5500",
@@ -23,9 +25,7 @@ app.use(cors({
 }));
 
 
-// ======================================================
-// ALLOW JSON DATA
-// ======================================================
+// Allow JSON data
 
 app.use(express.json());
 
@@ -35,35 +35,13 @@ app.use(express.json());
 // ======================================================
 
 // Authentication routes
+
 app.use("/api/auth", authRoutes);
 
 
 // Appointment routes
+
 app.use("/api/appointments", appointmentRoutes);
-
-
-// ======================================================
-// CONNECT TO MONGODB ATLAS
-// ======================================================
-
-mongoose.connect(process.env.MONGO_URI)
-
-    .then(() => {
-
-        console.log(
-            "MongoDB connected successfully"
-        );
-
-    })
-
-    .catch((error) => {
-
-        console.log(
-            "MongoDB connection error:",
-            error
-        );
-
-    });
 
 
 // ======================================================
@@ -72,21 +50,36 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.get("/", (req, res) => {
 
-    res.send(
-        "HealthyNutrition Backend is running!"
-    );
+    res.send("HealthyNutrition Backend is running!");
 
 });
 
 
 // ======================================================
-// START SERVER
+// CONNECT DATABASE AND START SERVER
 // ======================================================
 
-app.listen(PORT, () => {
+mongoose.connect(process.env.MONGO_URI)
 
-    console.log(
-        `Server running at http://localhost:${PORT}`
-    );
+    .then(() => {
 
-});
+        console.log("MongoDB connected successfully");
+
+        app.listen(PORT, () => {
+
+            console.log(
+                `Server running at http://localhost:${PORT}`
+            );
+
+        });
+
+    })
+
+    .catch((error) => {
+
+        console.error(
+            "MongoDB connection error:",
+            error
+        );
+
+    });

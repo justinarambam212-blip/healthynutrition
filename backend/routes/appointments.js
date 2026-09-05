@@ -17,7 +17,9 @@ router.post(
     "/",
     authenticateToken,
     async (req, res) => {
-
+console.log("Appointment route reached");
+console.log("Request body:", req.body);
+console.log("User:", req.user);
         try {
 
             const {
@@ -193,6 +195,77 @@ router.post(
 
     }
 );
+// ======================================================
+// GET BOOKED APPOINTMENT DATES
+// ======================================================
 
+router.get(
+    "/booked-dates",
+    async (req, res) => {
+
+        try {
+
+            const bookedDates =
+                await Appointment.aggregate([
+
+                    {
+                        $match: {
+
+                            status:
+                                "confirmed"
+
+                        }
+                    },
+
+                    {
+                        $group: {
+
+                            _id:
+                                "$appointmentDate",
+
+                            count:
+                                {
+                                    $sum: 1
+                                }
+
+                        }
+                    },
+
+                    {
+                        $sort: {
+
+                            _id: 1
+
+                        }
+                    }
+
+                ]);
+
+
+            res.status(200).json({
+
+                bookedDates
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "Error fetching booked dates:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                message:
+                    "Unable to fetch booked dates."
+
+            });
+
+        }
+
+    }
+);
 
 module.exports = router;
