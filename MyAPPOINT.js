@@ -148,7 +148,7 @@ async function loadAppointments() {
 
     try {
         const response = await fetch(
-            "http://localhost:5000/api/appointments/my",
+           "http://localhost:5000/api/appointments/my-appointments",
             {
                 method: "GET",
                 headers: {
@@ -203,7 +203,7 @@ async function cancelAppointment(appointmentId, button) {
         const response = await fetch(
             `http://localhost:5000/api/appointments/${appointmentId}/cancel`,
             {
-                method: "PATCH",
+                method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"

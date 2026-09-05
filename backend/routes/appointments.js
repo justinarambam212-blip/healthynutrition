@@ -319,4 +319,95 @@ router.get(
 
     }
 );
+// ======================================================
+// CANCEL APPOINTMENT
+// ======================================================
+
+router.put(
+    "/:id/cancel",
+    authenticateToken,
+    async (req, res) => {
+
+        try {
+
+            const appointment =
+                await Appointment.findOne({
+
+                    _id: req.params.id,
+
+                    user: req.user.userId
+
+                });
+
+
+            // Appointment not found
+
+            if (!appointment) {
+
+                return res.status(404).json({
+
+                    message:
+                        "Appointment not found."
+
+                });
+
+            }
+
+
+            // Already cancelled
+
+            if (
+                appointment.status ===
+                "cancelled"
+            ) {
+
+                return res.status(400).json({
+
+                    message:
+                        "This appointment is already cancelled."
+
+                });
+
+            }
+
+
+            // Cancel appointment
+
+            appointment.status =
+                "cancelled";
+
+
+            await appointment.save();
+
+
+            res.status(200).json({
+
+                message:
+                    "Appointment cancelled successfully.",
+
+                appointment
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Appointment cancellation error:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                message:
+                    "Unable to cancel appointment."
+
+            });
+
+        }
+
+    }
+);
 module.exports = router;
