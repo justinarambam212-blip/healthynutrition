@@ -31,7 +31,145 @@ console.log("User:", req.user);
                 reason
             } = req.body;
 
+// ==========================================
+// CHECK APPOINTMENT DATE AND TIME
+// ==========================================
 
+const now = new Date();
+
+const today = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+);
+
+
+/*
+   Convert appointment date
+   into a Date object.
+*/
+
+const selectedDate = new Date(
+    appointmentDate + "T00:00:00"
+);
+
+
+/*
+   Prevent past dates.
+*/
+
+if (selectedDate < today) {
+
+    return res.status(400).json({
+
+        message:
+            "You cannot book an appointment for a past date."
+
+    });
+
+}
+
+
+/*
+   Check if selected date is today.
+*/
+
+const isToday =
+
+    selectedDate.getFullYear() ===
+    now.getFullYear() &&
+
+    selectedDate.getMonth() ===
+    now.getMonth() &&
+
+    selectedDate.getDate() ===
+    now.getDate();
+
+
+
+if (isToday) {
+
+
+    /*
+       Appointment hours close at 3 PM.
+    */
+
+    if (
+
+        now.getHours() > 15 ||
+
+        (
+            now.getHours() === 15 &&
+            now.getMinutes() >= 0
+        )
+
+    ) {
+
+        return res.status(400).json({
+
+            message:
+                "Appointments for today are already closed."
+
+        });
+
+    }
+
+
+
+    /*
+       Convert selected appointment
+       time into hours and minutes.
+    */
+
+    const [
+
+        appointmentHour,
+        appointmentMinute
+
+    ] =
+        appointmentTime
+            .split(":")
+            .map(Number);
+
+
+
+    const selectedAppointmentTime =
+        new Date();
+
+
+    selectedAppointmentTime.setHours(
+
+        appointmentHour,
+
+        appointmentMinute,
+
+        0,
+
+        0
+
+    );
+
+
+
+    /*
+       Prevent booking a time
+       that has already passed.
+    */
+
+    if (
+        selectedAppointmentTime <= now
+    ) {
+
+        return res.status(400).json({
+
+            message:
+                "This appointment time has already passed."
+
+        });
+
+    }
+
+}
             // ==========================================
             // CHECK REQUIRED FIELDS
             // ==========================================

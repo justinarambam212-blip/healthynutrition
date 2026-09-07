@@ -5,6 +5,7 @@
 
 console.log("Appointment JavaScript loaded!");
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
 
@@ -15,8 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const nutritionCards =
         document.querySelectorAll(".nutrition-card");
 
+
     const nutritionSlider =
         document.querySelector(".nutrition-slider");
+
 
     let currentCard = 0;
 
@@ -117,16 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 navItems.forEach((nav) => {
 
-                    nav.classList.remove(
-                        "active"
-                    );
+                    nav.classList.remove("active");
 
                 });
 
 
-                item.classList.add(
-                    "active"
-                );
+                item.classList.add("active");
 
             }
         );
@@ -140,9 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const notificationButton =
-        document.querySelector(
-            ".notification-btn"
-        );
+        document.querySelector(".notification-btn");
 
 
     if (notificationButton) {
@@ -167,9 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const profileArea =
-        document.querySelector(
-            ".profile-area"
-        );
+        document.querySelector(".profile-area");
 
 
     if (profileArea) {
@@ -194,9 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const mealRows =
-        document.querySelectorAll(
-            ".meal-row"
-        );
+        document.querySelectorAll(".meal-row");
 
 
     mealRows.forEach((row) => {
@@ -221,9 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const softButtons =
-        document.querySelectorAll(
-            ".soft-btn"
-        );
+        document.querySelectorAll(".soft-btn");
 
 
     softButtons.forEach((button) => {
@@ -249,9 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const expertButton =
-        document.querySelector(
-            ".expert-btn"
-        );
+        document.querySelector(".expert-btn");
 
 
     if (expertButton) {
@@ -267,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
-    }
+    };
 
 
 
@@ -276,9 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const reminder =
-        document.querySelector(
-            ".reminder"
-        );
+        document.querySelector(".reminder");
 
 
     if (reminder) {
@@ -294,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
-    }
+    };
 
 
 
@@ -303,9 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const buttons =
-        document.querySelectorAll(
-            "button"
-        );
+        document.querySelectorAll("button");
 
 
     buttons.forEach((button) => {
@@ -315,14 +300,10 @@ document.addEventListener("DOMContentLoaded", () => {
             function (event) {
 
                 const ripple =
-                    document.createElement(
-                        "span"
-                    );
+                    document.createElement("span");
 
 
-                ripple.classList.add(
-                    "ripple"
-                );
+                ripple.classList.add("ripple");
 
 
                 const rect =
@@ -341,9 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "px";
 
 
-                button.appendChild(
-                    ripple
-                );
+                button.appendChild(ripple);
 
 
                 setTimeout(() => {
@@ -426,17 +405,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const progressBars =
-        document.querySelectorAll(
-            ".progress-bar"
-        );
+        document.querySelectorAll(".progress-bar");
 
 
     progressBars.forEach((bar) => {
 
         const value =
-            bar.getAttribute(
-                "data-progress"
-            );
+            bar.getAttribute("data-progress");
 
 
         if (value) {
@@ -455,9 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const yearElements =
-        document.querySelectorAll(
-            ".current-year"
-        );
+        document.querySelectorAll(".current-year");
 
 
     yearElements.forEach((element) => {
@@ -604,6 +577,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+    const appointmentTime =
+        document.getElementById(
+            "appointmentTime"
+        );
+
+
     const prevMonth =
         document.getElementById(
             "prevMonth"
@@ -614,6 +593,313 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(
             "nextMonth"
         );
+
+
+
+    /* =====================================================
+       DATE HELPERS
+    ===================================================== */
+
+    function getTodayDateString() {
+
+        const today =
+            new Date();
+
+
+        const year =
+            today.getFullYear();
+
+
+        const month =
+            String(
+                today.getMonth() + 1
+            ).padStart(2, "0");
+
+
+        const day =
+            String(
+                today.getDate()
+            ).padStart(2, "0");
+
+
+        return `${year}-${month}-${day}`;
+
+    }
+
+
+
+    /* =====================================================
+       CHECK IF APPOINTMENT HOURS ARE OVER
+
+       Last appointment = 3:00 PM
+
+       At 3:00 PM or later,
+       today's appointment booking closes.
+    ===================================================== */
+
+    function isAppointmentHoursOver() {
+
+        const now =
+            new Date();
+
+
+        const currentHour =
+            now.getHours();
+
+
+        const currentMinute =
+            now.getMinutes();
+
+
+        if (currentHour > 15) {
+
+            return true;
+
+        }
+
+
+        if (
+            currentHour === 15 &&
+            currentMinute >= 0
+        ) {
+
+            return true;
+
+        }
+
+
+        return false;
+
+    }
+
+
+
+    /* =====================================================
+       UPDATE AVAILABLE TIME SLOTS
+
+       For today's date:
+       Passed slots are disabled.
+
+       For future dates:
+       All slots are available.
+    ===================================================== */
+
+    function updateAvailableTimeSlots() {
+
+        if (
+            !appointmentDate ||
+            !appointmentTime
+        ) {
+
+            return;
+
+        }
+
+
+        const selectedDate =
+            appointmentDate.value;
+
+
+        const todayString =
+            getTodayDateString();
+
+
+        /*
+           Reset selected time whenever
+           the date changes.
+        */
+
+        appointmentTime.value = "";
+
+
+        const options =
+            appointmentTime.querySelectorAll(
+                "option"
+            );
+
+
+        options.forEach((option) => {
+
+
+            /*
+               Ignore placeholder option.
+            */
+
+            if (!option.value) {
+
+                return;
+
+            }
+
+
+            /*
+               Future date.
+
+               Enable every slot.
+            */
+
+            if (
+                selectedDate !== todayString
+            ) {
+
+                option.disabled =
+                    false;
+
+
+                option.hidden =
+                    false;
+
+
+                return;
+
+            }
+
+
+            /*
+               TODAY
+
+               Compare each appointment
+               time with current time.
+            */
+
+            const now =
+                new Date();
+
+
+            const currentHour =
+                now.getHours();
+
+
+            const currentMinute =
+                now.getMinutes();
+
+
+            const [
+                slotHour,
+                slotMinute
+            ] =
+                option.value
+                    .split(":")
+                    .map(Number);
+
+
+            const slotHasPassed =
+
+                slotHour < currentHour ||
+
+                (
+
+                    slotHour ===
+                    currentHour &&
+
+                    slotMinute <=
+                    currentMinute
+
+                );
+
+
+            if (slotHasPassed) {
+
+                option.disabled =
+                    true;
+
+
+                option.hidden =
+                    true;
+
+            }
+
+
+            else {
+
+                option.disabled =
+                    false;
+
+
+                option.hidden =
+                    false;
+
+            }
+
+        });
+
+    }
+
+
+
+    /*
+       Prevent manual selection of
+       previous dates from date input.
+    */
+
+    if (appointmentDate) {
+
+        appointmentDate.min =
+            getTodayDateString();
+
+    }
+
+
+
+    /*
+       When user manually changes
+       the date input.
+    */
+
+    if (appointmentDate) {
+
+        appointmentDate.addEventListener(
+            "change",
+            () => {
+
+
+                const selectedDate =
+                    appointmentDate.value;
+
+
+                const todayString =
+                    getTodayDateString();
+
+
+                /*
+                   If today's appointment hours
+                   are already finished.
+                */
+
+                if (
+
+                    selectedDate ===
+                    todayString &&
+
+                    isAppointmentHoursOver()
+
+                ) {
+
+                    alert(
+                        "Appointments for today are closed. Please select another date."
+                    );
+
+
+                    appointmentDate.value =
+                        "";
+
+
+                    appointmentTime.value =
+                        "";
+
+
+                    return;
+
+                }
+
+
+                updateAvailableTimeSlots();
+
+            }
+        );
+
+    }
+
 
 
     /*
@@ -658,8 +944,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!response.ok) {
 
                 console.error(
+
                     data.message ||
+
                     "Unable to load booked dates."
+
                 );
 
                 return;
@@ -725,6 +1014,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        CHECK PAST DATE
+
+       Also prevents selecting today
+       when appointment hours are over.
     ===================================================== */
 
     function isPastDate(
@@ -753,7 +1045,54 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        return date < today;
+        /*
+           Previous dates.
+        */
+
+        if (date < today) {
+
+            return true;
+
+        }
+
+
+        /*
+           Check if this calendar day
+           is today.
+        */
+
+        const isToday =
+
+            date.getFullYear() ===
+            today.getFullYear() &&
+
+            date.getMonth() ===
+            today.getMonth() &&
+
+            date.getDate() ===
+            today.getDate();
+
+
+
+        /*
+           If today's appointment hours
+           have ended, disable today.
+        */
+
+        if (
+
+            isToday &&
+
+            isAppointmentHoursOver()
+
+        ) {
+
+            return true;
+
+        }
+
+
+        return false;
 
     }
 
@@ -766,8 +1105,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderCalendar() {
 
         if (
+
             !calendarDays ||
+
             !calendarMonth
+
         ) {
 
             return;
@@ -818,7 +1160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /* ===============================================
-           EMPTY SPACES BEFORE FIRST DAY
+           EMPTY SPACES
         =============================================== */
 
         for (
@@ -848,7 +1190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /* ===============================================
-           CREATE DAYS
+           CREATE CALENDAR DAYS
         =============================================== */
 
         for (
@@ -882,7 +1224,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             /* ===========================================
-               FIND BOOKING INFORMATION
+               BOOKING INFORMATION
             =========================================== */
 
             const bookingInfo =
@@ -894,20 +1236,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             /*
-               Check if the date has reached
-               maximum booking capacity.
-
-               Maximum = 5 people.
+               Maximum 5 appointments.
             */
 
             const isFullyBooked =
+
                 bookingInfo &&
+
                 bookingInfo.count >= 5;
 
 
 
             /* ===========================================
-               FULLY BOOKED DATE
+               FULLY BOOKED
             =========================================== */
 
             if (isFullyBooked) {
@@ -925,15 +1266,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             /* ===========================================
-               PAST DATE
+               PAST OR CLOSED DATE
             =========================================== */
 
             if (
+
                 isPastDate(
                     year,
                     month,
                     day
                 )
+
             ) {
 
                 dayElement.classList.add(
@@ -941,8 +1284,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-                dayElement.title =
-                    "Past dates cannot be selected";
+                /*
+                   Different message
+                   for today after hours.
+                */
+
+                const todayString =
+                    getTodayDateString();
+
+
+                if (
+                    dateString === todayString
+                ) {
+
+                    dayElement.title =
+                        "Appointments for today are closed";
+
+                }
+
+
+                else {
+
+                    dayElement.title =
+                        "Past dates cannot be selected";
+
+                }
 
             }
 
@@ -1026,7 +1392,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                         /*
-                           Put date inside appointment form.
+                           Put date in form.
                         */
 
                         if (appointmentDate) {
@@ -1039,7 +1405,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                         /*
-                           Display readable selected date.
+                           IMPORTANT:
+
+                           Update available
+                           time slots.
+                        */
+
+                        updateAvailableTimeSlots();
+
+
+
+                        /*
+                           Display readable date.
                         */
 
                         if (selectedDateText) {
@@ -1078,7 +1455,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             }
-
 
 
             calendarDays.appendChild(
@@ -1140,8 +1516,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /*
-       Load booking information from MongoDB
-       when page opens.
+       Load bookings when page opens.
     */
 
     loadBookedDates();
@@ -1149,239 +1524,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-   17. APPOINTMENT FORM SUBMISSION + RAZORPAY PAYMENT
-===================================================== */
+       17. APPOINTMENT FORM SUBMISSION
+    ===================================================== */
 
-const appointmentForm =
-    document.getElementById(
-        "appointmentForm"
-    );
+    const appointmentForm =
+        document.getElementById(
+            "appointmentForm"
+        );
 
 
-if (appointmentForm) {
+    if (appointmentForm) {
 
-    appointmentForm.addEventListener(
-        "submit",
-        async function (event) {
+        appointmentForm.addEventListener(
+            "submit",
+            async function (event) {
 
 
-            /*
-               Prevent page refresh.
-            */
+                /*
+                   Prevent page refresh.
+                */
 
-            event.preventDefault();
-
-
-            console.log(
-                "APPOINTMENT FORM SUBMITTED"
-            );
-
-
-            /* =========================================
-               GET FORM VALUES
-            ========================================= */
-
-            const phone =
-                document
-                    .getElementById("phone")
-                    .value
-                    .trim();
-
-
-            const appointmentType =
-                document
-                    .getElementById(
-                        "appointmentType"
-                    )
-                    .value;
-
-
-            const selectedAppointmentDate =
-                document
-                    .getElementById(
-                        "appointmentDate"
-                    )
-                    .value;
-
-
-            const appointmentTime =
-                document
-                    .getElementById(
-                        "appointmentTime"
-                    )
-                    .value;
-
-
-            const selectedMode =
-                document.querySelector(
-                    'input[name="mode"]:checked'
-                );
-
-
-            const mode =
-                selectedMode
-                    ? selectedMode.value
-                    : "";
-
-
-            const reason =
-                document
-                    .getElementById("reason")
-                    .value
-                    .trim();
-
-
-            /* =========================================
-               VALIDATION
-            ========================================= */
-
-            if (
-
-                !phone ||
-
-                !appointmentType ||
-
-                !selectedAppointmentDate ||
-
-                !appointmentTime ||
-
-                !mode
-
-            ) {
-
-                alert(
-                    "Please fill in all required appointment details."
-                );
-
-                return;
-
-            }
-
-
-            /* =========================================
-               CHECK LOGIN TOKEN
-            ========================================= */
-
-            const token =
-                localStorage.getItem(
-                    "token"
-                );
-
-
-            if (!token) {
-
-                alert(
-                    "Please log in before booking an appointment."
-                );
-
-                return;
-
-            }
-
-
-            /* =========================================
-               CREATE APPOINTMENT DATA
-            ========================================= */
-
-            const appointmentData = {
-
-                phone:
-                    phone,
-
-                appointmentType:
-                    appointmentType,
-
-                appointmentDate:
-                    selectedAppointmentDate,
-
-                appointmentTime:
-                    appointmentTime,
-
-                mode:
-                    mode,
-
-                reason:
-                    reason
-
-            };
-
-
-            /* =========================================
-               GET BOOK BUTTON
-            ========================================= */
-
-            const bookButton =
-                appointmentForm.querySelector(
-                    ".book-btn"
-                );
-
-
-            if (bookButton) {
-
-                bookButton.disabled =
-                    true;
-
-
-                bookButton.textContent =
-                    "Preparing Payment...";
-
-            }
-
-
-            try {
-
-
-                /* =====================================
-                   STEP 1
-                   CREATE RAZORPAY ORDER
-                ===================================== */
-
-                const paymentResponse =
-                    await fetch(
-                        "http://localhost:5000/api/payment/create-order",
-                        {
-
-                            method:
-                                "POST",
-
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-
-                            },
-
-
-                            body:
-                                JSON.stringify({
-
-                                    amount: 500
-
-                                })
-
-                        }
-                    );
-
-
-                const paymentData =
-                    await paymentResponse.json();
+                event.preventDefault();
 
 
                 console.log(
-                    "Razorpay order response:",
-                    paymentData
+                    "APPOINTMENT FORM SUBMITTED"
                 );
 
 
-                if (!paymentResponse.ok) {
+
+                /* =========================================
+                   GET FORM VALUES
+                ========================================= */
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+
+                const appointmentType =
+                    document
+                        .getElementById(
+                            "appointmentType"
+                        )
+                        .value;
+
+
+                const selectedAppointmentDate =
+                    document
+                        .getElementById(
+                            "appointmentDate"
+                        )
+                        .value;
+
+
+                const selectedAppointmentTime =
+                    document
+                        .getElementById(
+                            "appointmentTime"
+                        )
+                        .value;
+
+
+                const selectedMode =
+                    document.querySelector(
+                        'input[name="mode"]:checked'
+                    );
+
+
+                const mode =
+                    selectedMode
+                        ? selectedMode.value
+                        : "";
+
+
+                const reason =
+                    document
+                        .getElementById("reason")
+                        .value
+                        .trim();
+
+
+
+                /* =========================================
+                   VALIDATION
+                ========================================= */
+
+                if (
+
+                    !phone ||
+
+                    !appointmentType ||
+
+                    !selectedAppointmentDate ||
+
+                    !selectedAppointmentTime ||
+
+                    !mode
+
+                ) {
 
                     alert(
-
-                        paymentData.message ||
-
-                        "Unable to initialize payment."
-
+                        "Please fill in all required appointment details."
                     );
 
                     return;
@@ -1389,331 +1635,596 @@ if (appointmentForm) {
                 }
 
 
-                /* =====================================
-                   STEP 2
-                   CONFIGURE RAZORPAY CHECKOUT
-                ===================================== */
 
-                const options = {
+                /* =========================================
+                   CHECK TODAY'S APPOINTMENT TIME
+                ========================================= */
 
-                    key:
-                        paymentData.key,
+                const todayString =
+                    getTodayDateString();
 
 
-                    amount:
-                        paymentData.order.amount,
+                if (
 
+                    selectedAppointmentDate ===
+                    todayString
 
-                    currency:
-                        paymentData.order.currency,
+                ) {
 
+                    /*
+                       If appointment hours
+                       are completely over.
+                    */
 
-                    name:
-                        "HealthyNutrition",
+                    if (
+                        isAppointmentHoursOver()
+                    ) {
 
+                        alert(
+                            "Appointments for today are already closed. Please select another date."
+                        );
 
-                    description:
-                        "Nutrition Consultation Appointment",
-
-
-                    order_id:
-                        paymentData.order.id,
-
-
-                    handler:
-                        async function (
-                            paymentResult
-                        ) {
-
-
-                            console.log(
-                                "Payment successful:",
-                                paymentResult
-                            );
-
-
-                            /*
-                               Payment completed.
-
-                               Now save appointment
-                               in MongoDB.
-                            */
-
-
-                            if (bookButton) {
-
-                                bookButton.textContent =
-                                    "Booking Appointment...";
-
-                            }
-
-
-                            try {
-
-
-                                /* =====================
-                                   STEP 3
-                                   SAVE APPOINTMENT
-                                ===================== */
-
-                                const response =
-                                    await fetch(
-                                        "http://localhost:5000/api/appointments",
-                                        {
-
-                                            method:
-                                                "POST",
-
-
-                                            headers: {
-
-                                                "Content-Type":
-                                                    "application/json",
-
-
-                                                "Authorization":
-                                                    `Bearer ${token}`
-
-                                            },
-
-
-                                            body:
-                                                JSON.stringify(
-                                                    appointmentData
-                                                )
-
-                                        }
-                                    );
-
-
-                                const data =
-                                    await response.json();
-
-
-                                console.log(
-                                    "Appointment response:",
-                                    data
-                                );
-
-
-                                if (!response.ok) {
-
-                                    alert(
-
-                                        data.message ||
-
-                                        "Payment was successful, but appointment booking failed."
-
-                                    );
-
-                                    return;
-
-                                }
-
-
-                                /* =====================
-                                   SUCCESS
-                                ===================== */
-
-                                alert(
-                                    "Payment successful! Your appointment has been booked."
-                                );
-
-
-                                console.log(
-
-                                    "Appointment saved in MongoDB:",
-
-                                    data.appointment
-
-                                );
-
-
-                                /*
-                                   Reset form.
-                                */
-
-                                appointmentForm.reset();
-
-
-                                /*
-                                   Clear date.
-                                */
-
-                                if (appointmentDate) {
-
-                                    appointmentDate.value =
-                                        "";
-
-                                }
-
-
-                                if (selectedDateText) {
-
-                                    selectedDateText.textContent =
-                                        "Please select a date";
-
-                                }
-
-
-                                /*
-                                   Remove selected date.
-                                */
-
-                                document
-                                    .querySelectorAll(
-                                        ".calendar-day.selected"
-                                    )
-                                    .forEach(
-                                        (element) => {
-
-                                            element.classList.remove(
-                                                "selected"
-                                            );
-
-                                        }
-                                    );
-
-
-                                /*
-                                   Reload calendar.
-                                */
-
-                                await loadBookedDates();
-
-
-                            }
-
-
-                            catch (error) {
-
-                                console.error(
-                                    "Appointment booking error:",
-                                    error
-                                );
-
-
-                                alert(
-                                    "Payment was successful, but there was an error saving your appointment."
-                                );
-
-                            }
-
-
-                            finally {
-
-                                if (bookButton) {
-
-                                    bookButton.disabled =
-                                        false;
-
-
-                                    bookButton.textContent =
-                                        "Book Appointment";
-
-                                }
-
-                            }
-
-                        },
-
-
-                    prefill: {
-
-                        name:
-                            "",
-
-
-                        contact:
-                            phone
-
-                    },
-
-
-                    theme: {
-
-                        color:
-                            "#2E8B57"
-
-                    },
-
-
-                    modal: {
-
-                        ondismiss:
-                            function () {
-
-                                console.log(
-                                    "Payment popup closed"
-                                );
-
-
-                                if (bookButton) {
-
-                                    bookButton.disabled =
-                                        false;
-
-
-                                    bookButton.textContent =
-                                        "Book Appointment";
-
-                                }
-
-                            }
+                        return;
 
                     }
+
+
+                    /*
+                       Check selected slot.
+                    */
+
+                    const [
+                        selectedHour,
+                        selectedMinute
+                    ] =
+                        selectedAppointmentTime
+                            .split(":")
+                            .map(Number);
+
+
+                    const selectedTime =
+                        new Date();
+
+
+                    selectedTime.setHours(
+                        selectedHour,
+                        selectedMinute,
+                        0,
+                        0
+                    );
+
+
+                    const now =
+                        new Date();
+
+
+                    if (
+                        selectedTime <= now
+                    ) {
+
+                        alert(
+                            "This appointment time has already passed. Please select another available time."
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+
+
+                /* =========================================
+                   CHECK LOGIN TOKEN
+                ========================================= */
+
+                const token =
+                    localStorage.getItem(
+                        "token"
+                    );
+
+
+                if (!token) {
+
+                    alert(
+                        "Please log in before booking an appointment."
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =========================================
+                   CREATE APPOINTMENT DATA
+                ========================================= */
+
+                const appointmentData = {
+
+                    phone:
+                        phone,
+
+                    appointmentType:
+                        appointmentType,
+
+                    appointmentDate:
+                        selectedAppointmentDate,
+
+                    appointmentTime:
+                        selectedAppointmentTime,
+
+                    mode:
+                        mode,
+
+                    reason:
+                        reason
 
                 };
 
 
-                /* =====================================
-                   STEP 3
-                   OPEN RAZORPAY POPUP
-                ===================================== */
+                console.log(
+                    "Appointment data:",
+                    appointmentData
+                );
 
-                const razorpayCheckout =
-                    new Razorpay(
-                        options
+
+
+                /* =========================================
+                   GET BOOK BUTTON
+                ========================================= */
+
+                const bookButton =
+                    appointmentForm.querySelector(
+                        ".book-btn"
                     );
 
 
-                razorpayCheckout.open();
+                if (bookButton) {
 
+                    bookButton.disabled =
+                        true;
+
+
+                    bookButton.textContent =
+                        "Preparing Payment...";
+
+                }
+
+
+
+                try {
+
+
+                    /* =====================================
+                       STEP 1
+                       CREATE RAZORPAY ORDER
+                    ===================================== */
+
+                    const paymentResponse =
+                        await fetch(
+                            "http://localhost:5000/api/payment/create-order",
+                            {
+
+                                method:
+                                    "POST",
+
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Authorization":
+                                        `Bearer ${token}`
+
+                                },
+
+
+                                body:
+                                    JSON.stringify({
+
+                                        amount:
+                                            500
+
+                                    })
+
+                            }
+                        );
+
+
+                    const paymentData =
+                        await paymentResponse.json();
+
+
+
+                    if (!paymentResponse.ok) {
+
+                        throw new Error(
+
+                            paymentData.message ||
+
+                            "Unable to create payment order."
+
+                        );
+
+                    }
+
+
+                    console.log(
+                        "Razorpay order:",
+                        paymentData
+                    );
+
+
+
+                    /* =====================================
+                       STEP 2
+                       RAZORPAY OPTIONS
+                    ===================================== */
+
+                    const options = {
+
+
+                        key:
+                            paymentData.key,
+
+
+                        amount:
+                            paymentData.order.amount,
+
+
+                        currency:
+                            paymentData.order.currency,
+
+
+                        name:
+                            "HealthyNutrition",
+
+
+                        description:
+                            "Nutrition Consultation Appointment",
+
+
+                        order_id:
+                            paymentData.order.id,
+
+
+                        /* =================================
+                           PAYMENT SUCCESS
+                        ================================= */
+
+                        handler:
+                            async function (
+                                paymentResult
+                            ) {
+
+
+                                console.log(
+                                    "Payment successful:",
+                                    paymentResult
+                                );
+
+
+                                /*
+                                   Change button text.
+                                */
+
+                                if (bookButton) {
+
+                                    bookButton.textContent =
+                                        "Booking Appointment...";
+
+                                }
+
+
+                                try {
+
+
+                                    /* =====================
+                                       STEP 3
+                                       SAVE APPOINTMENT
+                                    ===================== */
+
+                                    const response =
+                                        await fetch(
+                                            "http://localhost:5000/api/appointments",
+                                            {
+
+                                                method:
+                                                    "POST",
+
+
+                                                headers: {
+
+                                                    "Content-Type":
+                                                        "application/json",
+
+
+                                                    "Authorization":
+                                                        `Bearer ${token}`
+
+                                                },
+
+
+                                                body:
+                                                    JSON.stringify(
+                                                        appointmentData
+                                                    )
+
+                                            }
+                                        );
+
+
+                                    const data =
+                                        await response.json();
+
+
+                                    console.log(
+                                        "Appointment response:",
+                                        data
+                                    );
+
+
+                                    if (!response.ok) {
+
+                                        alert(
+
+                                            data.message ||
+
+                                            "Payment was successful, but appointment booking failed."
+
+                                        );
+
+                                        return;
+
+                                    }
+
+
+
+                                    /* =====================
+                                       SUCCESS
+                                    ===================== */
+
+                                    alert(
+                                        "Payment successful! Your appointment has been booked."
+                                    );
+
+
+                                    console.log(
+
+                                        "Appointment saved in MongoDB:",
+
+                                        data.appointment
+
+                                    );
+
+
+
+                                    /*
+                                       Reset form.
+                                    */
+
+                                    appointmentForm.reset();
+
+
+
+                                    /*
+                                       Clear appointment date.
+                                    */
+
+                                    if (appointmentDate) {
+
+                                        appointmentDate.value =
+                                            "";
+
+                                    }
+
+
+
+                                    /*
+                                       Clear appointment time.
+                                    */
+
+                                    if (appointmentTime) {
+
+                                        appointmentTime.value =
+                                            "";
+
+                                    }
+
+
+
+                                    /*
+                                       Clear selected date text.
+                                    */
+
+                                    if (selectedDateText) {
+
+                                        selectedDateText.textContent =
+                                            "Please select a date";
+
+                                    }
+
+
+
+                                    /*
+                                       Remove calendar selection.
+                                    */
+
+                                    document
+                                        .querySelectorAll(
+                                            ".calendar-day.selected"
+                                        )
+                                        .forEach(
+                                            (element) => {
+
+                                                element.classList.remove(
+                                                    "selected"
+                                                );
+
+                                            }
+                                        );
+
+
+
+                                    /*
+                                       Reload calendar.
+                                    */
+
+                                    await loadBookedDates();
+
+
+                                }
+
+
+                                catch (error) {
+
+                                    console.error(
+                                        "Appointment booking error:",
+                                        error
+                                    );
+
+
+                                    alert(
+                                        "Payment was successful, but there was an error saving your appointment."
+                                    );
+
+                                }
+
+
+                                finally {
+
+                                    if (bookButton) {
+
+                                        bookButton.disabled =
+                                            false;
+
+
+                                        bookButton.textContent =
+                                            "Book Appointment";
+
+                                    }
+
+                                }
+
+                            },
+
+
+                        /* =================================
+                           PREFILL DETAILS
+                        ================================= */
+
+                        prefill: {
+
+                            name:
+                                "",
+
+
+                            contact:
+                                phone
+
+                        },
+
+
+                        /* =================================
+                           THEME
+                        ================================= */
+
+                        theme: {
+
+                            color:
+                                "#2E8B57"
+
+                        },
+
+
+                        /* =================================
+                           PAYMENT POPUP CLOSED
+                        ================================= */
+
+                        modal: {
+
+                            ondismiss:
+                                function () {
+
+                                    console.log(
+                                        "Payment popup closed"
+                                    );
+
+
+                                    if (bookButton) {
+
+                                        bookButton.disabled =
+                                            false;
+
+
+                                        bookButton.textContent =
+                                            "Book Appointment";
+
+                                    }
+
+                                }
+
+                        }
+
+                    };
+
+
+
+                    /* =====================================
+                       STEP 3
+                       OPEN RAZORPAY POPUP
+                    ===================================== */
+
+                    const razorpayCheckout =
+                        new Razorpay(
+                            options
+                        );
+
+
+                    razorpayCheckout.open();
+
+
+                }
+
+
+                catch (error) {
+
+                    console.error(
+                        "Payment error:",
+                        error
+                    );
+
+
+                    alert(
+
+                        error.message ||
+
+                        "Unable to start payment. Please try again."
+
+                    );
+
+
+                    if (bookButton) {
+
+                        bookButton.disabled =
+                            false;
+
+
+                        bookButton.textContent =
+                            "Book Appointment";
+
+                    }
+
+                }
 
             }
+        );
+
+    }
 
 
-            catch (error) {
-
-                console.error(
-                    "Payment error:",
-                    error
-                );
-
-
-                alert(
-                    "Unable to connect to the payment server."
-                );
-
-            }
-
-
-            finally {
-
-
-                /*
-                   Do not immediately enable the button
-                   because Razorpay popup may still be open.
-
-                   The modal ondismiss function handles it.
-                */
-
-            }
-
-        }
-    );
-
-}
 
     /* =====================================================
        18. GLOBAL HEALTHYNUTRITION OBJECT
@@ -1734,7 +2245,11 @@ if (appointmentForm) {
 
 
         mealPlans:
-            mealPlans
+            mealPlans,
+
+
+        updateAvailableTimeSlots:
+            updateAvailableTimeSlots
 
     };
 
