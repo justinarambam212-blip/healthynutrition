@@ -1,40 +1,10 @@
 /* =========================================================
-   HEALTHYNUTRITION - SETTINGS PAGE
+   HEALTHYNUTRITION SETTINGS PAGE
+   SOFT GIRLY STYLE
 ========================================================= */
 
-
 /* =========================================================
-   1. ROOT VARIABLES
-========================================================= */
-
-:root {
-
-    --primary: #e889a8;
-    --primary-dark: #d86f92;
-
-    --secondary: #8fc9a3;
-
-    --background: #fff8fb;
-
-    --card: #ffffff;
-
-    --text-dark: #40363b;
-    --text-light: #81757b;
-
-    --border: #eadde3;
-
-    --input-bg: #fffdfd;
-
-    --danger: #d9536f;
-
-    --shadow:
-        0 10px 30px rgba(130, 90, 110, 0.08);
-
-}
-
-
-/* =========================================================
-   2. RESET
+   RESET
 ========================================================= */
 
 * {
@@ -43,871 +13,657 @@
     box-sizing: border-box;
 }
 
-
 body {
-
-    font-family:
-        "Poppins",
-        "Segoe UI",
-        sans-serif;
+    font-family: "Poppins", sans-serif;
 
     background:
-        linear-gradient(
-            135deg,
-            #fff8fb,
-            #fffdf8
-        );
+        radial-gradient(
+            circle at top left,
+            rgba(255, 220, 237, 0.8),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(224, 213, 255, 0.8),
+            transparent 35%
+        ),
+        linear-gradient(135deg, #fff9fc, #f8f5ff);
 
-    color: var(--text-dark);
-
+    color: #665b70;
     min-height: 100vh;
-
 }
 
-
 /* =========================================================
-   3. MAIN CONTAINER
+   MAIN CONTAINER
 ========================================================= */
 
 .settings-container {
-
     width: 100%;
-
-    max-width: 1150px;
-
-    margin: 0 auto;
-
-    padding:
-        30px
-        35px
-        50px;
-
+    max-width: 1050px;
+    margin: auto;
+    padding: 35px 22px 60px;
 }
 
-
 /* =========================================================
-   4. HEADER
+   HEADER
 ========================================================= */
 
 .settings-header {
-
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 
-    flex-direction: column;
-
-    gap: 25px;
-
-    margin-bottom: 25px;
-
+    margin-bottom: 30px;
 }
-
-
-/* Back button */
 
 .back-button {
-
     display: inline-flex;
-
     align-items: center;
-
-    width: fit-content;
+    gap: 8px;
 
     text-decoration: none;
+    color: #b76e99;
 
-    color: var(--primary-dark);
+    background: #fff0f7;
+    border: 1px solid #f5d8e8;
 
-    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 22px;
 
+    font-size: 13px;
     font-weight: 600;
 
-    padding:
-        9px
-        15px;
-
-    border-radius: 12px;
-
-    background: #fff;
-
-    border: 1px solid var(--border);
-
-    transition:
-        0.25s ease;
-
+    transition: 0.3s ease;
 }
-
 
 .back-button:hover {
-
-    background: #fff0f5;
-
-    transform:
-        translateX(-3px);
-
+    background: #e6c3e8;
+    color: white;
+    transform: translateY(-2px);
 }
-
-
-/* Page title */
 
 .settings-title {
-
     display: flex;
-
     align-items: center;
-
-    gap: 15px;
-
+    gap: 13px;
 }
 
-
-.settings-title > span {
-
-    width: 55px;
-
-    height: 55px;
+.title-icon {
+    width: 48px;
+    height: 48px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    border-radius: 17px;
+    border-radius: 16px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffe1eb,
-            #f8d4e0
-        );
+    background: linear-gradient(
+        135deg,
+        #ffe2ef,
+        #e8ddff
+    );
 
-    font-size: 25px;
-
+    color: #c47ca5;
+    font-size: 20px;
 }
-
 
 .settings-title h1 {
-
+    color: #76547f;
     font-size: 28px;
-
-    font-weight: 700;
-
-    margin-bottom: 4px;
-
+    margin-bottom: 3px;
 }
-
 
 .settings-title p {
-
-    color: var(--text-light);
-
-    font-size: 14px;
-
+    color: #a595ad;
+    font-size: 13px;
 }
-
 
 /* =========================================================
-   5. PROFILE HEADER
+   PROFILE HEADER
 ========================================================= */
+
 .profile-header {
-
     display: flex;
-
     align-items: center;
-
     gap: 25px;
 
-    background: var(--card);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #f5deeb;
 
+    border-radius: 24px;
     padding: 25px;
-
-    border-radius: 20px;
-
-    border: 1px solid var(--border);
-
-    box-shadow: var(--shadow);
-
     margin-bottom: 25px;
 
+    box-shadow: 0 8px 25px rgba(180, 140, 175, 0.08);
 }
-
-
-/* Profile photo area */
 
 .profile-photo-section {
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
-    gap: 10px;
-
+    gap: 12px;
 }
-
-
-/* Profile picture */
 
 .profile-avatar {
+    position: relative;
 
-    width: 95px;
-
-    height: 95px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    width: 100px;
+    height: 100px;
 
     border-radius: 50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffe3ed,
-            #e9f7ed
-        );
-
-    border: 3px solid #ffffff;
-
-    box-shadow:
-        0 5px 15px
-        rgba(130, 90, 110, 0.12);
-
     overflow: hidden;
 
-    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    background: linear-gradient(
+        135deg,
+        #ffe0ed,
+        #e5dcff
+    );
+
+    border: 4px solid white;
+    box-shadow: 0 6px 20px rgba(196, 132, 173, 0.18);
 }
 
-
-/* Uploaded image */
-
 .profile-avatar img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
-
     display: none;
-
 }
 
-
-/* Default person icon */
+.profile-avatar img.active {
+    display: block;
+}
 
 #defaultAvatar {
-
-    display: block;
-
+    color: #c58caf;
+    font-size: 38px;
 }
 
-
-/* Change photo button */
+#defaultAvatar.hidden {
+    display: none;
+}
 
 .photo-upload-button {
-
-    padding:
-        7px 12px;
-
-    border-radius: 9px;
-
-    background: #fff1f6;
-
-    color: var(--primary-dark);
-
-    border: 1px solid #f3d5e0;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
     cursor: pointer;
 
-    transition:
-        0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 
+    color: #bd719c;
+    background: #fff0f6;
+
+    border: 1px solid #f6d9e8;
+    border-radius: 18px;
+
+    padding: 8px 13px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition: 0.3s ease;
 }
-
 
 .photo-upload-button:hover {
-
-    background: #ffe5ef;
-
-    transform:
-        translateY(-1px);
-
+    background: #f3c9dc;
+    color: white;
 }
-
-
-/* Profile text */
 
 .profile-info h2 {
-
-    font-size: 19px;
-
-    margin-bottom: 5px;
-
+    color: #76547f;
+    font-size: 22px;
+    margin-bottom: 7px;
 }
-
 
 .profile-info p {
-
-    color: var(--text-light);
-
+    color: #a595ad;
     font-size: 13px;
-
-    line-height: 1.6;
-
+    line-height: 1.7;
 }
+
 /* =========================================================
-   6. SETTINGS CARD
+   SETTINGS CARD
 ========================================================= */
 
 .settings-card {
+    position: relative;
 
-    background: var(--card);
+    background: rgba(255, 255, 255, 0.9);
 
-    border: 1px solid var(--border);
-
-    border-radius: 22px;
+    border: 1px solid #f4dfea;
+    border-radius: 24px;
 
     padding: 28px;
-
     margin-bottom: 22px;
 
-    box-shadow: var(--shadow);
+    box-shadow:
+        0 8px 25px rgba(180, 140, 175, 0.07),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
+    overflow: hidden;
 }
 
+.settings-card::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background: linear-gradient(
+        180deg,
+        #efa8c8,
+        #cbb7ee
+    );
+}
 
 /* =========================================================
-   7. CARD HEADING
+   CARD HEADING
 ========================================================= */
 
 .card-heading {
-
     display: flex;
-
     align-items: center;
-
-    gap: 14px;
+    gap: 13px;
 
     margin-bottom: 25px;
-
 }
 
-
 .heading-icon {
-
-    width: 45px;
-
-    height: 45px;
+    width: 43px;
+    height: 43px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 14px;
 
-    background: #fff1f6;
+    background: linear-gradient(
+        135deg,
+        #ffe5f0,
+        #eee7ff
+    );
 
-    font-size: 21px;
-
+    color: #c37ca5;
+    font-size: 18px;
 }
 
+.heart-icon {
+    color: #e889a9;
+}
 
 .card-heading h2 {
-
+    color: #76547f;
     font-size: 18px;
-
-    font-weight: 650;
-
-    margin-bottom: 3px;
-
+    margin-bottom: 4px;
 }
-
 
 .card-heading p {
-
-    color: var(--text-light);
-
+    color: #aa9bad;
     font-size: 12px;
-
 }
 
-
 /* =========================================================
-   8. FORM GRID
+   FORM GRID
 ========================================================= */
 
 .form-grid {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 20px;
-
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
 }
-
-
-/* =========================================================
-   9. FORM GROUP
-========================================================= */
 
 .form-group {
-
     display: flex;
-
     flex-direction: column;
-
-    gap: 8px;
-
+    gap: 9px;
 }
 
-
-.form-group.full-width {
-
-    grid-column:
-        1 / -1;
-
+.full-width {
+    grid-column: 1 / -1;
 }
 
-
-.form-group label {
-
+.form-group > label {
+    color: #76667e;
     font-size: 13px;
-
     font-weight: 600;
-
-    color: var(--text-dark);
-
 }
 
-
-.form-group label span {
-
-    color: var(--danger);
-
-    margin-left: 2px;
-
+.form-group > label span {
+    color: #df829f;
 }
-
 
 /* =========================================================
-   10. INPUTS / SELECT / TEXTAREA
+   INPUTS
 ========================================================= */
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-
+input,
+select,
+textarea {
     width: 100%;
 
-    border: 1px solid var(--border);
-
-    background: var(--input-bg);
-
-    color: var(--text-dark);
-
+    border: 1px solid #eedce9;
     border-radius: 12px;
 
-    padding:
-        12px
-        14px;
+    background: #fffafd;
+    color: #665b70;
+
+    padding: 13px 14px;
 
     font-family: inherit;
-
     font-size: 13px;
 
     outline: none;
-
-    transition:
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
-
+    transition: 0.3s ease;
 }
 
-
-.form-group input {
-
-    height: 46px;
-
+input::placeholder,
+textarea::placeholder {
+    color: #c0b2c1;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #dca3c3;
 
-.form-group select {
-
-    height: 46px;
-
-    cursor: pointer;
-
-}
-
-
-.form-group textarea {
-
-    resize: vertical;
-
-    min-height: 90px;
-
-}
-
-
-/* Placeholder */
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-
-    color: #b5aab0;
-
-}
-
-
-/* Focus */
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-
-    border-color: var(--primary);
-
-    background: #ffffff;
+    background: white;
 
     box-shadow:
-        0 0 0 3px
-        rgba(232, 137, 168, 0.12);
-
+        0 0 0 4px rgba(235, 184, 211, 0.15);
 }
 
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
 
 /* =========================================================
-   11. HEIGHT / WEIGHT UNIT
+   INPUT WITH UNIT
 ========================================================= */
 
 .input-with-unit {
-
-    position: relative;
-
     display: flex;
-
     align-items: center;
 
+    border: 1px solid #eedce9;
+    border-radius: 12px;
+
+    background: #fffafd;
+    overflow: hidden;
+
+    transition: 0.3s ease;
 }
 
+.input-with-unit:focus-within {
+    border-color: #dca3c3;
+    box-shadow: 0 0 0 4px rgba(235, 184, 211, 0.15);
+}
 
 .input-with-unit input {
-
-    padding-right: 55px;
-
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
 }
-
 
 .input-with-unit span {
-
-    position: absolute;
-
-    right: 15px;
-
-    color: var(--text-light);
-
+    padding: 0 15px;
+    color: #b69eaf;
     font-size: 12px;
-
     font-weight: 600;
-
-    pointer-events: none;
-
 }
 
+/* =========================================================
+   RADIO BUTTONS
+========================================================= */
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 3px;
+}
+
+.radio-option {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #817487 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.radio-option input[type="radio"] {
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+    padding: 0;
+
+    accent-color: #d58caf;
+    cursor: pointer;
+}
+
+.radio-option:hover {
+    color: #bd719c !important;
+}
 
 /* =========================================================
-   12. REQUIRED NOTE
+   REQUIRED NOTE
 ========================================================= */
 
 .required-note {
-
+    color: #a595ad;
     font-size: 12px;
-
-    color: var(--text-light);
-
-    margin:
-        5px 0
-        20px;
-
+    margin: 5px 0 20px;
 }
-
 
 .required-note span {
-
-    color: var(--danger);
-
+    color: #df829f;
     font-weight: 700;
-
 }
 
-
 /* =========================================================
-   13. ACTION BUTTONS
+   FORM ACTIONS
 ========================================================= */
 
 .form-actions {
-
     display: flex;
-
     justify-content: flex-end;
-
     align-items: center;
-
-    gap: 12px;
-
-    margin-top: 5px;
-
+    gap: 13px;
 }
 
-
-/* Cancel */
-
-.cancel-button {
-
-    text-decoration: none;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    height: 45px;
-
-    padding:
-        0 22px;
-
-    border-radius: 12px;
-
-    border: 1px solid var(--border);
-
-    background: #ffffff;
-
-    color: var(--text-dark);
+.cancel-button,
+.save-button {
+    border-radius: 22px;
+    padding: 12px 22px;
 
     font-family: inherit;
-
     font-size: 13px;
-
     font-weight: 600;
 
-    transition:
-        0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
 
+    transition: 0.3s ease;
 }
 
+.cancel-button {
+    color: #a4879e;
+    background: #fff0f6;
+    border: 1px solid #f3d8e7;
+}
 
 .cancel-button:hover {
-
-    background: #fff4f7;
-
+    background: #f4d1e0;
+    color: white;
 }
-
-
-/* Save */
 
 .save-button {
-
-    height: 45px;
-
-    padding:
-        0 25px;
-
     border: none;
 
-    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--primary-dark)
-        );
+    color: white;
 
-    color: #ffffff;
+    background: linear-gradient(
+        135deg,
+        #e89abd,
+        #b59ae7
+    );
 
-    font-family: inherit;
-
-    font-size: 13px;
-
-    font-weight: 650;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 7px 18px
-        rgba(216, 111, 146, 0.20);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-
+    box-shadow: 0 7px 18px rgba(211, 139, 185, 0.2);
 }
-
 
 .save-button:hover {
-
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 10px 22px
-        rgba(216, 111, 146, 0.28);
-
+        0 11px 25px rgba(211, 139, 185, 0.3);
 }
-
-
-.save-button:active {
-
-    transform:
-        translateY(0);
-
-}
-
 
 /* =========================================================
-   14. INVALID INPUT
-   JavaScript can also use this later.
+   RESPONSIVE DESIGN
 ========================================================= */
 
-.form-group input:invalid:not(:placeholder-shown),
-.form-group select:invalid:not(:focus) {
-
-    border-color:
-        rgba(217, 83, 111, 0.45);
-
-}
-
-
-/* =========================================================
-   15. RESPONSIVE - TABLET
-========================================================= */
-
-@media (max-width: 800px) {
+@media (max-width: 750px) {
 
     .settings-container {
-
-        padding:
-            25px
-            22px
-            40px;
-
+        padding: 25px 15px 45px;
     }
 
-
-    .form-grid {
-
-        grid-template-columns: 1fr;
-
+    .settings-header {
+        align-items: flex-start;
+        flex-direction: column-reverse;
     }
 
-
-    .form-group.full-width {
-
-        grid-column: auto;
-
+    .back-button {
+        align-self: flex-start;
     }
-
-}
-
-
-/* =========================================================
-   16. RESPONSIVE - MOBILE
-========================================================= */
-
-@media (max-width: 550px) {
-
-    .settings-container {
-
-        padding:
-            20px
-            15px
-            35px;
-
-    }
-
 
     .settings-title h1 {
-
-        font-size: 23px;
-
+        font-size: 25px;
     }
-
-
-    .settings-title > span {
-
-        width: 48px;
-
-        height: 48px;
-
-        font-size: 21px;
-
-    }
-
 
     .profile-header {
-
-        padding: 18px;
-
-        border-radius: 17px;
-
+        align-items: flex-start;
+        flex-direction: column;
+        text-align: center;
     }
 
-
-    .profile-avatar {
-
-        width: 55px;
-
-        height: 55px;
-
-        font-size: 25px;
-
+    .profile-photo-section {
+        width: 100%;
     }
 
+    .profile-info {
+        width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
 
     .settings-card {
-
-        padding: 20px;
-
-        border-radius: 18px;
-
+        padding: 23px 19px;
+        border-radius: 20px;
     }
 
-
-    .card-heading {
-
-        align-items: flex-start;
-
+    .card-heading h2 {
+        font-size: 17px;
     }
-
 
     .form-actions {
-
         flex-direction: column-reverse;
-
-        width: 100%;
-
+        align-items: stretch;
     }
 
-
-    .save-button,
-    .cancel-button {
-
+    .cancel-button,
+    .save-button {
+        justify-content: center;
+        text-align: center;
         width: 100%;
+    }
 
+}
+
+@media (max-width: 450px) {
+
+    .settings-title {
+        align-items: flex-start;
+    }
+
+    .title-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 17px;
+    }
+
+    .settings-title h1 {
+        font-size: 22px;
+    }
+
+    .settings-title p {
+        font-size: 11px;
+    }
+
+    .profile-header {
+        padding: 20px;
+    }
+
+    .profile-avatar {
+        width: 85px;
+        height: 85px;
+    }
+
+    .profile-info h2 {
+        font-size: 19px;
+    }
+
+    .settings-card {
+        padding: 20px 16px;
+    }
+
+    .card-heading {
+        align-items: flex-start;
+    }
+
+    .heading-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .card-heading h2 {
+        font-size: 16px;
+    }
+
+    .card-heading p {
+        font-size: 11px;
     }
 
 }
