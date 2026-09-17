@@ -684,146 +684,90 @@ document.addEventListener("DOMContentLoaded", () => {
        All slots are available.
     ===================================================== */
 
-    function updateAvailableTimeSlots() {
+   async function updateAvailableTimeSlots() {
 
-        if (
-            !appointmentDate ||
-            !appointmentTime
-        ) {
+    if (!appointmentDate || !appointmentTime) {
+        return;
+    }
 
-            return;
+    const selectedDate = appointmentDate.value;
+    const todayString = getTodayDateString();
 
+    // Reset selected time whenever the date changes
+    appointmentTime.value = "";
+
+    const options = appointmentTime.querySelectorAll("option");
+
+    // If no date is selected, show all time slots
+    if (!selectedDate) {
+        options.forEach(option => {
+            if (option.value) {
+                option.disabled = false;
+                option.hidden = false;
+            }
+        });
+        return;
+    }
+
+    let bookedTimes = [];
+
+    /*
+       Fetch times already booked for this date.
+       Update the URL if your backend route is different.
+    */
+
+    try {
+        const response = await fetch(
+            `http://localhost:5000/api/appointments/booked-times?date=${encodeURIComponent(selectedDate)}`
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not fetch booked times.");
         }
 
+        const data = await response.json();
 
-        const selectedDate =
-            appointmentDate.value;
+        bookedTimes = data.bookedTimes || [];
 
-
-        const todayString =
-            getTodayDateString();
-
-
-        /*
-           Reset selected time whenever
-           the date changes.
-        */
-
-        appointmentTime.value = "";
-
-
-        const options =
-            appointmentTime.querySelectorAll(
-                "option"
-            );
-
-
-        options.forEach((option) => {
-
-
-            /*
-               Ignore placeholder option.
-            */
-
-            if (!option.value) {
-
-                return;
-
-            }
-
-
-            /*
-               Future date.
-
-               Enable every slot.
-            */
-
-            if (
-                selectedDate !== todayString
-            ) {
-
-                option.disabled =
-                    false;
-
-
-                option.hidden =
-                    false;
-
-
-                return;
-
-            }
-
-
-            /*
-               TODAY
-
-               Compare each appointment
-               time with current time.
-            */
-
-            const now =
-                new Date();
-
-
-            const currentHour =
-                now.getHours();
-
-
-            const currentMinute =
-                now.getMinutes();
-
-
-            const [
-                slotHour,
-                slotMinute
-            ] =
-                option.value
-                    .split(":")
-                    .map(Number);
-
-
-            const slotHasPassed =
-
-                slotHour < currentHour ||
-
-                (
-
-                    slotHour ===
-                    currentHour &&
-
-                    slotMinute <=
-                    currentMinute
-
-                );
-
-
-            if (slotHasPassed) {
-
-                option.disabled =
-                    true;
-
-
-                option.hidden =
-                    true;
-
-            }
-
-
-            else {
-
-                option.disabled =
-                    false;
-
-
-                option.hidden =
-                    false;
-
-            }
-
-        });
-
+    } catch (error) {
+        console.error("Error fetching booked times:", error);
     }
+
+    const now = new Date();
+
+    options.forEach(option => {
+
+        // Ignore the placeholder option
+        if (!option.value) {
+            return;
+        }
+
+        // Check if this time is already booked
+        const timeIsBooked = bookedTimes.includes(option.value);
+
+        let timeHasPassed = false;
+
+        // Check past times only when the selected date is today
+        if (selectedDate === todayString) {
+
+            const [slotHour, slotMinute] =
+                option.value.split(":").map(Number);
+
+            timeHasPassed =
+                slotHour < now.getHours() ||
+                (
+                    slotHour === now.getHours() &&
+                    slotMinute <= now.getMinutes()
+                );
+        }
+
+        // Hide booked or already-passed time slots
+        const unavailable = timeIsBooked || timeHasPassed;
+
+        option.disabled = unavailable;
+        option.hidden = unavailable;
+    });
+}
 
 
 
@@ -1928,7 +1872,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                     const response =
                                         await fetch(
-                                            "https://healthynutrition.onrender.com/api/appointments",
+                                            "/api/appointments",
                                             {
 
                                                 method:
