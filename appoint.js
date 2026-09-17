@@ -933,7 +933,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const response =
                 await fetch(
-                    "http://localhost:5000/api/appointments/booked-dates"
+                    "https://healthynutrition.onrender.com/api/appointments/booked-dates"
                 );
 
 
@@ -1803,7 +1803,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const paymentResponse =
                         await fetch(
-                            "http://localhost:5000/api/payment/create-order",
+                            "https://healthynutrition.onrender.com/api/payment/create-order",
                             {
 
                                 method:
@@ -1928,7 +1928,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                     const response =
                                         await fetch(
-                                            "http://localhost:5000/api/appointments",
+                                            "https://healthynutrition.onrender.com/api/appointments",
                                             {
 
                                                 method:

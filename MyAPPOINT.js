@@ -148,7 +148,7 @@ async function loadAppointments() {
 
     try {
         const response = await fetch(
-           "http://localhost:5000/api/appointments/my-appointments",
+           "https://healthynutrition.onrender.com/api/appointments/my-appointments",
             {
                 method: "GET",
                 headers: {
@@ -201,7 +201,7 @@ async function cancelAppointment(appointmentId, button) {
 
     try {
         const response = await fetch(
-            `http://localhost:5000/api/appointments/${appointmentId}/cancel`,
+            `https://healthynutrition.onrender.com/api/appointments/${appointmentId}/cancel`,
             {
                 method: "PUT",
                 headers: {

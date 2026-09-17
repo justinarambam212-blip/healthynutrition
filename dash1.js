@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/protected",
+            "https://healthynutrition.onrender.com/api/auth/protected",
             {
                 method: "GET",
                 headers: {

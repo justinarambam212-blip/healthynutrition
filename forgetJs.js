@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Send email to backend
             const response = await fetch(
-                "http://localhost:5000/api/auth/forgot-password",
+                "https://healthynutrition.onrender.com/api/auth/forgot-password",
                 {
                     method: "POST",
 

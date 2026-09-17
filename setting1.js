@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // BACKEND API
     // =====================================================
 
-    const API_URL = "http://localhost:5000/api/auth/profile";
+    const API_URL = "https://healthynutrition.onrender.com/api/auth/profile";
 
 
     // =====================================================
