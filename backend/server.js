@@ -17,9 +17,19 @@ const PORT = process.env.PORT || 5000;
 // ======================================================
 
 // CORS
+const allowedOrigins = [
+    "http://127.0.0.1:5500",
+    "https://healthynutrition-seven.vercel.app"
+];
 
 app.use(cors({
-    origin: "http://127.0.0.1:5500",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
