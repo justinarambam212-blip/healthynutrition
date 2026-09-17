@@ -1,0 +1,11 @@
+# Backend
+backend/node_modules/
+backend/.env
+
+# Node
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
