@@ -2191,7 +2191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mealPlans:
             mealPlans,
 
-
+ 
         updateAvailableTimeSlots:
             updateAvailableTimeSlots
 
