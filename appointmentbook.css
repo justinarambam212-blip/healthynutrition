@@ -31,20 +31,20 @@ body {
 }
 
 .logo a {
-    text-decoration: none;
     color: #2f6f4e;
     font-size: 25px;
     font-weight: 700;
+    text-decoration: none;
 }
 
 .back-btn {
-    text-decoration: none;
-    color: #2f6f4e;
-    font-size: 15px;
-    font-weight: 600;
     padding: 10px 18px;
     border: 1px solid #2f6f4e;
     border-radius: 8px;
+    color: #2f6f4e;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
     transition: 0.25s ease;
 }
 
@@ -67,13 +67,9 @@ body {
     align-items: start;
 }
 
-/* =====================================================
-   APPOINTMENT FORM CARD
-===================================================== */
-
 .appointment-card {
-    background: #fff;
     padding: 35px;
+    background: #fff;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
@@ -104,9 +100,9 @@ body {
 }
 
 .appointment-title h1 {
-    font-size: 28px;
     margin-bottom: 6px;
     color: #26352d;
+    font-size: 28px;
 }
 
 .appointment-title p {
@@ -115,7 +111,7 @@ body {
 }
 
 /* =====================================================
-   FORM GROUPS
+   FORM GROUPS AND FIELDS
 ===================================================== */
 
 .form-group {
@@ -125,14 +121,10 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 8px;
+    color: #34443b;
     font-size: 14px;
     font-weight: 600;
-    color: #34443b;
 }
-
-/* =====================================================
-   INPUTS, SELECTS AND TEXTAREA
-===================================================== */
 
 .form-group input,
 .form-group select,
@@ -141,10 +133,10 @@ body {
     padding: 13px 14px;
     border: 1px solid #d8e2dc;
     border-radius: 9px;
+    outline: none;
     background: #fff;
     color: #26352d;
     font-size: 14px;
-    outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -156,8 +148,8 @@ body {
 }
 
 .form-group textarea {
-    resize: vertical;
     min-height: 110px;
+    resize: vertical;
 }
 
 /* =====================================================
@@ -192,8 +184,8 @@ body {
 }
 
 .mode-option:hover {
-    background: #f4faf6;
     border-color: #72a98a;
+    background: #f4faf6;
 }
 
 .mode-option input {
@@ -211,81 +203,187 @@ body {
 ===================================================== */
 
 .package-section {
-    margin-top: 25px;
+    margin: 25px 0;
 }
 
-.package-description {
-    color: #888;
+.package-heading {
+    color: #333;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.package-description,
+.package-subtitle {
+    margin: 8px 0 18px;
+    color: #777;
     font-size: 14px;
-    margin: 8px 0 15px;
 }
 
 .package-options {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
 }
 
 .package-card {
     position: relative;
     display: block;
     overflow: hidden;
-    padding: 18px;
-    border: 2px solid #f1dce9;
-    border-radius: 15px;
+    padding: 22px;
+    border: 2px solid #f0c5dc;
+    border-radius: 18px;
     background: #fffafd;
     cursor: pointer;
-    transition: 0.25s ease;
+    transition: border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
 }
-
-/* Hidden radio button */
-
-.package-card input[type="radio"] {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: auto;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Hover */
 
 .package-card:hover {
-    border-color: #df91bd;
+    border-color: #e879ad;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(220, 130, 180, 0.12);
 }
 
-/* Selected package */
-
 .package-card:has(input:checked) {
-    border-color: #d879ae;
-    background: #fff0f7;
-    box-shadow: 0 5px 15px rgba(220, 130, 180, 0.15);
+    border-color: #e879ad;
+    background: #fff0f6;
+    box-shadow: 0 5px 18px rgba(232, 121, 173, 0.15);
+}
+
+.package-content h3 {
+    margin: 12px 0;
+    color: #333;
+    font-size: 19px;
+}
+
+.package-content h2 {
+    margin: 10px 0;
+    color: #df70a3;
+    font-size: 27px;
+}
+
+.package-content p {
+    color: #777;
+    font-size: 14px;
+}
+
+.package-content ul {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.package-content li {
+    margin-bottom: 9px;
+    color: #555;
+    font-size: 13px;
+}
+
+/* =====================================================
+   DIET PLAN DURATION
+===================================================== */
+
+.diet-plan-options {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #fff5fa;
+}
+
+.diet-plan-options[hidden],
+#dietPlanOptions[hidden] {
+    display: none !important;
+}
+
+.diet-plan-options h3 {
+    margin-bottom: 18px;
+    color: #333;
+}
+
+.duration-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.duration-card {
+    position: relative;
+    display: block;
+    padding: 22px 12px;
+    border: 2px solid #f0c5dc;
+    border-radius: 18px;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+}
+
+.duration-card:hover {
+    border-color: #e879ad;
+    transform: translateY(-2px);
+}
+
+.duration-card:has(input:checked) {
+    border-color: #e879ad;
+    background: #fff0f6;
+    box-shadow: 0 5px 16px rgba(232, 121, 173, 0.12);
+}
+
+.duration-card span {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.duration-card strong {
+    color: #444;
+}
+
+.duration-card b {
+    color: #df70a3;
+    font-size: 27px;
+}
+
+/* =====================================================
+   HIDE RADIO DOTS
+   WHOLE CARD REMAINS CLICKABLE
+===================================================== */
+
+.package-card input[type="radio"],
+.duration-card input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+    opacity: 0;
+}
+
+/* Selected card appearance */
+
+.package-card:has(input[type="radio"]:checked),
+.duration-card:has(input[type="radio"]:checked) {
+    border: 2px solid #e879ad;
+    background: #fff0f6;
+    box-shadow: 0 5px 18px rgba(232, 121, 173, 0.15);
 }
 
 /* Keyboard accessibility */
 
-.package-card:focus-within {
-    outline: 2px solid #d879ae;
+.package-card:focus-within,
+.duration-card:focus-within {
+    outline: 3px solid rgba(223, 112, 163, 0.25);
     outline-offset: 3px;
-}
-
-.package-content h3 {
-    color: #49394c;
-    margin-bottom: 8px;
-}
-
-.package-content p {
-    color: #888;
-    font-size: 13px;
-    margin-bottom: 12px;
-}
-
-.package-content h2 {
-    color: #d46da5;
-    font-size: 24px;
 }
 
 /* =====================================================
@@ -294,8 +392,8 @@ body {
 
 .agreement {
     margin: 10px 0 22px;
-    font-size: 13px;
     color: #68766e;
+    font-size: 13px;
 }
 
 .agreement label {
@@ -341,11 +439,11 @@ body {
 ===================================================== */
 
 .appointment-info {
-    background: #eaf5ee;
-    padding: 25px;
-    border-radius: 16px;
     position: sticky;
     top: 25px;
+    padding: 25px;
+    border-radius: 16px;
+    background: #eaf5ee;
 }
 
 /* =====================================================
@@ -367,20 +465,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
     border-radius: 10px;
+    background: #fff;
     font-size: 22px;
 }
 
 .info-board-header h2 {
-    font-size: 21px;
     color: #285c41;
+    font-size: 21px;
 }
 
 .info-board-header p {
     margin-top: 3px;
-    font-size: 13px;
     color: #65766c;
+    font-size: 13px;
 }
 
 /* =====================================================
@@ -395,8 +493,8 @@ body {
 }
 
 .calendar-header h3 {
-    font-size: 17px;
     color: #285c41;
+    font-size: 17px;
 }
 
 .calendar-header button {
@@ -408,7 +506,7 @@ body {
     color: #285c41;
     font-size: 22px;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: background 0.2s ease;
 }
 
 .calendar-header button:hover {
@@ -416,7 +514,7 @@ body {
 }
 
 /* =====================================================
-   CALENDAR WEEKDAYS
+   CALENDAR WEEKDAYS AND DATES
 ===================================================== */
 
 .calendar-weekdays {
@@ -428,14 +526,10 @@ body {
 }
 
 .calendar-weekdays span {
+    color: #6d7c73;
     font-size: 11px;
     font-weight: 600;
-    color: #6d7c73;
 }
-
-/* =====================================================
-   CALENDAR DATES
-===================================================== */
 
 .calendar-days {
     display: grid;
@@ -454,31 +548,23 @@ body {
     color: #34443b;
     font-size: 13px;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
-
-/* Empty spaces */
 
 .calendar-day.empty {
     background: transparent;
     cursor: default;
 }
 
-/* Hover */
-
 .calendar-day:not(.empty):not(.booked):hover {
     border-color: #4d936b;
     transform: translateY(-1px);
 }
 
-/* Available date */
-
 .calendar-day.available {
     background: #fff;
     color: #34443b;
 }
-
-/* Booked date */
 
 .calendar-day.booked {
     background: #f5b5b5;
@@ -486,16 +572,12 @@ body {
     cursor: not-allowed;
 }
 
-/* Selected date */
-
 .calendar-day.selected {
+    border-color: #2f6f4e;
     background: #2f6f4e;
     color: #fff;
-    border-color: #2f6f4e;
     font-weight: 700;
 }
-
-/* Today's date */
 
 .calendar-day.today {
     border: 2px solid #2f6f4e;
@@ -513,8 +595,8 @@ body {
     margin-top: 20px;
     padding-top: 15px;
     border-top: 1px solid #cfe1d6;
-    font-size: 11px;
     color: #596a60;
+    font-size: 11px;
 }
 
 .calendar-legend div {
@@ -535,8 +617,8 @@ body {
 }
 
 .legend-box.available {
-    background: #fff;
     border: 1px solid #d5dfd8;
+    background: #fff;
 }
 
 .legend-box.selected {
@@ -550,20 +632,20 @@ body {
 .selected-date-display {
     margin-top: 18px;
     padding: 13px;
-    background: #fff;
     border-radius: 9px;
+    background: #fff;
 }
 
 .selected-date-display strong {
-    font-size: 12px;
     color: #596a60;
+    font-size: 12px;
 }
 
 .selected-date-display p {
     margin-top: 5px;
+    color: #285c41;
     font-size: 14px;
     font-weight: 600;
-    color: #285c41;
 }
 
 /* =====================================================
@@ -571,7 +653,6 @@ body {
 ===================================================== */
 
 @media (max-width: 900px) {
-
     .appointment-container {
         grid-template-columns: 1fr;
     }
@@ -586,7 +667,6 @@ body {
 ===================================================== */
 
 @media (max-width: 600px) {
-
     .appointment-header {
         padding: 16px 5%;
     }
@@ -632,7 +712,8 @@ body {
         padding: 22px;
     }
 
-    .package-options {
+    .package-options,
+    .duration-options {
         grid-template-columns: 1fr;
     }
 

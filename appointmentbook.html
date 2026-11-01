@@ -196,83 +196,79 @@
                  <!-- ==========================================
      CONSULTATION + DIET PLAN PACKAGE
 ========================================== -->
+<!-- =================================
+     CONSULTATION PACKAGE
+================================= -->
 
 <div class="form-group package-section">
 
-    <label>
+    <label class="package-heading">
         Choose Your Consultation Package
     </label>
 
-    <p class="package-description">
-        Select a plan that suits your nutritional needs.
+    <p class="package-subtitle">
+        Select consultation only or consultation with a personalised diet plan.
     </p>
 
     <div class="package-options">
 
-        <!-- 1 WEEK -->
+        <!-- CONSULTATION ONLY -->
 
         <label class="package-card">
 
             <input
                 type="radio"
-                name="planDuration"
-                value="1_week"
+                name="packageType"
+                value="consultation_only"
                 required
             >
 
             <div class="package-content">
 
-                <h3>1 Week</h3>
+                <h3>Consultation Only</h3>
 
-                <p>7-day diet plan</p>
+                <h2>₹500</h2>
 
-                <h2>₹800</h2>
+                <p>
+                    One-to-one discussion with our nutrition expert.
+                </p>
 
-            </div>
-
-        </label>
-
-
-        <!-- 1 MONTH -->
-
-        <label class="package-card">
-
-            <input
-                type="radio"
-                name="planDuration"
-                value="1_month"
-            >
-
-            <div class="package-content">
-
-                <h3>1 Month</h3>
-
-                <p>30-day diet plan</p>
-
-                <h2>₹1,500</h2>
+                <ul>
+                    <li>Discuss your health concerns</li>
+                    <li>Ask nutrition-related questions</li>
+                    <li>Personalised guidance during consultation</li>
+                    <li>No diet plan included</li>
+                </ul>
 
             </div>
 
         </label>
 
 
-        <!-- 2 MONTHS -->
+        <!-- CONSULTATION + DIET PLAN -->
 
         <label class="package-card">
 
             <input
                 type="radio"
-                name="planDuration"
-                value="2_months"
+                name="packageType"
+                value="consultation_diet_plan"
             >
 
             <div class="package-content">
 
-                <h3>2 Months</h3>
+                <h3>Consultation + Diet Plan</h3>
 
-                <p>60-day diet plan</p>
+                <p>
+                    Consultation with a personalised diet plan.
+                </p>
 
-                <h2>₹2,500</h2>
+                <ul>
+                    <li>One-to-one consultation</li>
+                    <li>Personalised diet plan</li>
+                    <li>Nutrition recommendations</li>
+                    <li>Plan based on your requirements</li>
+                </ul>
 
             </div>
 
@@ -280,7 +276,69 @@
 
     </div>
 
+
+    <!-- DIET PLAN DURATION -->
+
+    <div id="dietPlanOptions" class="diet-plan-options" hidden>
+
+        <h3>Choose Your Diet Plan Duration</h3>
+
+        <div class="duration-options">
+
+            <label class="duration-card">
+
+                <input
+                    type="radio"
+                    name="planDuration"
+                    value="1_week"
+                >
+
+                <span>
+                    <strong>1 Week</strong>
+                    <b>₹800</b>
+                </span>
+
+            </label>
+
+
+            <label class="duration-card">
+
+                <input
+                    type="radio"
+                    name="planDuration"
+                    value="1_month"
+                >
+
+                <span>
+                    <strong>1 Month</strong>
+                    <b>₹1,500</b>
+                </span>
+
+            </label>
+
+
+            <label class="duration-card">
+
+                <input
+                    type="radio"
+                    name="planDuration"
+                    value="2_months"
+                >
+
+                <span>
+                    <strong>2 Months</strong>
+                    <b>₹2,500</b>
+                </span>
+
+            </label>
+
+        </div>
+
+    </div>
+
 </div>
+
+
 
                 <div class="form-row">
 

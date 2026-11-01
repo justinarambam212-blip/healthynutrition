@@ -1442,5 +1442,58 @@ document.addEventListener("DOMContentLoaded", () => {
         updateAvailableTimeSlots: updateAvailableTimeSlots
 
     };
+    /* =====================================
+   CONSULTATION TYPE SELECTION
+===================================== */
+
+const packageTypeRadios = document.querySelectorAll(
+    'input[name="packageType"]'
+);
+
+const dietPlanOptions = document.getElementById(
+    "dietPlanOptions"
+);
+
+const durationRadios = document.querySelectorAll(
+    'input[name="planDuration"]'
+);
+
+
+packageTypeRadios.forEach(radio => {
+
+    radio.addEventListener("change", function () {
+
+        if (this.value === "consultation_diet_plan") {
+
+            // Show diet plan duration options
+            dietPlanOptions.hidden = false;
+
+            // Duration is required for this choice
+            durationRadios.forEach(input => {
+                input.required = true;
+            });
+
+        }
+
+        else if (this.value === "consultation_only") {
+
+            // Hide diet plan duration options
+            dietPlanOptions.hidden = true;
+
+            // Remove duration requirement
+            durationRadios.forEach(input => {
+
+                input.required = false;
+
+                // Clear previous duration selection
+                input.checked = false;
+
+            });
+
+        }
+
+    });
+
+});
 
 });
