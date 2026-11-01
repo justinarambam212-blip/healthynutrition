@@ -643,6 +643,86 @@ body {
 
     color: #285c41;
 }
+/* ==========================================
+   CONSULTATION PACKAGE SECTION
+========================================== */
+
+.package-section {
+    margin-top: 25px;
+}
+
+.package-description {
+    color: #888;
+    font-size: 14px;
+    margin: 8px 0 15px;
+}
+
+.package-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.package-card {
+    position: relative;
+    display: block;
+    padding: 18px;
+    border: 2px solid #f1dce9;
+    border-radius: 15px;
+    background: #fffafd;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.package-card:hover {
+    border-color: #df91bd;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(220, 130, 180, 0.12);
+}
+
+.package-card input {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    accent-color: #d879ae;
+    cursor: pointer;
+}
+
+.package-card:has(input:checked) {
+    border-color: #d879ae;
+    background: #fff0f7;
+    box-shadow: 0 5px 15px rgba(220, 130, 180, 0.15);
+}
+
+.package-content h3 {
+    color: #49394c;
+    margin-bottom: 8px;
+}
+
+.package-content p {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.package-content h2 {
+    color: #d46da5;
+    font-size: 24px;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+
+    .package-options {
+        grid-template-columns: 1fr;
+    }
+
+    .package-card {
+        padding: 15px;
+    }
+
+}
 
 /* =====================================================
    RESPONSIVE DESIGN

@@ -2143,7 +2143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     alert(
 
-                        error.message ||
+                        error.message || 
 
                         "Unable to start payment. Please try again."
 
