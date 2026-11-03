@@ -624,7 +624,65 @@ body {
 .legend-box.selected {
     background: #2f6f4e;
 }
+/* =========================================
+   HIDE RADIO BUTTON CIRCLES
+========================================= */
 
+.package-card input[type="radio"],
+.duration-card input[type="radio"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    appearance: none !important;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================
+   MAKE THE ENTIRE CARD SELECTABLE
+========================================= */
+
+.package-card,
+.duration-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+
+/* =========================================
+   SELECTED CARD DESIGN
+========================================= */
+
+.package-card:has(input[type="radio"]:checked),
+.duration-card:has(input[type="radio"]:checked) {
+    border: 2px solid #e879ad;
+    background: #fff0f6;
+    box-shadow: 0 5px 18px rgba(232, 121, 173, 0.15);
+}
+
+
+/* =========================================
+   REMOVE DEFAULT FOCUS OUTLINE
+========================================= */
+
+.package-card:focus-within,
+.duration-card:focus-within {
+    outline: none;
+}
+
+
+/* =========================================
+   HOVER EFFECT
+========================================= */
+
+.package-card:hover,
+.duration-card:hover {
+    border-color: #e879ad;
+}
 /* =====================================================
    SELECTED DATE DISPLAY
 ===================================================== */

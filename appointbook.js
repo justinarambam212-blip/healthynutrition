@@ -850,579 +850,605 @@ document.addEventListener("DOMContentLoaded", () => {
     /* LOAD BOOKINGS WHEN PAGE OPENS */
 
     loadBookedDates();
-    /* =====================================================
-       17. APPOINTMENT FORM SUBMISSION + PACKAGE PAYMENT
-    ===================================================== */
+   /* =====================================================
+   17. APPOINTMENT FORM + CONSULTATION PAYMENT
+===================================================== */
 
-    const appointmentForm =
-        document.getElementById("appointmentForm");
+const appointmentForm =
+    document.getElementById("appointmentForm");
 
-    if (appointmentForm) {
+if (appointmentForm) {
 
-        appointmentForm.addEventListener(
-            "submit",
-            async function (event) {
+    appointmentForm.addEventListener("submit", async function (event) {
 
-                event.preventDefault();
+        event.preventDefault();
 
+        /* =========================================
+           GET FORM VALUES
+        ========================================= */
 
-                /* =========================================
-                   GET FORM VALUES
-                ========================================= */
+        const phone =
+            document.getElementById("phone")?.value.trim() || "";
 
-                const phone =
-                    document.getElementById("phone")?.value.trim() || "";
+        const appointmentType =
+            document.getElementById("appointmentType")?.value || "";
 
-                const appointmentType =
-                    document.getElementById("appointmentType")?.value || "";
+        const selectedAppointmentDate =
+            document.getElementById("appointmentDate")?.value || "";
 
-                const selectedAppointmentDate =
-                    document.getElementById("appointmentDate")?.value || "";
+        const selectedAppointmentTime =
+            document.getElementById("appointmentTime")?.value || "";
 
-                const selectedAppointmentTime =
-                    document.getElementById("appointmentTime")?.value || "";
+        const selectedMode =
+            document.querySelector('input[name="mode"]:checked');
 
-                const selectedMode =
-                    document.querySelector('input[name="mode"]:checked');
+        const mode = selectedMode ? selectedMode.value : "";
 
-                const mode =
-                    selectedMode ? selectedMode.value : "";
+        const reason =
+            document.getElementById("reason")?.value.trim() || "";
 
-                const reason =
-                    document.getElementById("reason")?.value.trim() || "";
 
+        /* =========================================
+           GET CONSULTATION PACKAGE
+        ========================================= */
 
-                /* =========================================
-                   GET SELECTED PACKAGE
-                ========================================= */
+        const selectedPackage =
+            document.querySelector('input[name="packageType"]:checked');
 
-                const selectedPackage =
-                    document.querySelector(
-                        'input[name="planDuration"]:checked'
-                    );
+        const packageType =
+            selectedPackage ? selectedPackage.value : "";
 
-                const planDuration =
-                    selectedPackage ? selectedPackage.value : "";
 
+        /* =========================================
+           GET DIET PLAN DURATION
+        ========================================= */
 
-                /* =========================================
-                   PACKAGE PRICES
-                ========================================= */
+        const selectedDuration =
+            document.querySelector('input[name="planDuration"]:checked');
 
-                const packagePrices = {
+        let planDuration =
+            selectedDuration ? selectedDuration.value : null;
 
-                    "1_week": 800,
 
-                    "1_month": 1500,
+        /* =========================================
+           PACKAGE PRICES
 
-                    "2_months": 2500
+           These prices are for display/validation.
+           Backend must independently calculate them.
+        ========================================= */
 
-                };
+        const packagePrices = {
 
+            consultation_only: 500,
 
-                /* =========================================
-                   VALIDATION
-                ========================================= */
+            consultation_diet_plan: {
+                "1_week": 800,
+                "1_month": 1500,
+                "2_months": 2500
+            }
 
-                if (
-                    !phone ||
-                    !appointmentType ||
-                    !selectedAppointmentDate ||
-                    !selectedAppointmentTime ||
-                    !mode ||
-                    !planDuration
-                ) {
+        };
 
-                    alert(
-                        "Please fill in all required details and select a package."
-                    );
 
-                    return;
+        /* =========================================
+           VALIDATE REQUIRED DETAILS
+        ========================================= */
 
-                }
+        if (
+            !phone ||
+            !appointmentType ||
+            !selectedAppointmentDate ||
+            !selectedAppointmentTime ||
+            !mode ||
+            !packageType
+        ) {
 
+            alert("Please fill in all required details and select a consultation package.");
 
-                if (
-                    !Object.prototype.hasOwnProperty.call(
-                        packagePrices,
-                        planDuration
-                    )
-                ) {
+            return;
 
-                    alert("Please select a valid package.");
+        }
 
-                    return;
 
-                }
+        /* =========================================
+           VALIDATE PACKAGE AND PRICE
+        ========================================= */
 
+        let selectedPrice = 0;
 
-                /* =========================================
-                   CHECK TODAY'S APPOINTMENT TIME
-                ========================================= */
+        if (packageType === "consultation_only") {
 
-                const todayString = getTodayDateString();
+            selectedPrice = packagePrices.consultation_only;
 
-                if (selectedAppointmentDate === todayString) {
+            planDuration = null;
 
-                    if (isAppointmentHoursOver()) {
+        }
 
-                        alert(
-                            "Appointments for today are already closed. Please select another date."
-                        );
+        else if (packageType === "consultation_diet_plan") {
 
-                        return;
+            if (
+                !planDuration ||
+                !Object.prototype.hasOwnProperty.call(
+                    packagePrices.consultation_diet_plan,
+                    planDuration
+                )
+            ) {
 
-                    }
+                alert("Please select a diet plan duration.");
 
-                    const [selectedHour, selectedMinute] =
-                        selectedAppointmentTime.split(":").map(Number);
+                return;
 
-                    const selectedTime = new Date();
+            }
 
-                    selectedTime.setHours(
-                        selectedHour,
-                        selectedMinute,
-                        0,
-                        0
-                    );
+            selectedPrice =
+                packagePrices.consultation_diet_plan[planDuration];
 
-                    if (selectedTime <= new Date()) {
+        }
 
-                        alert(
-                            "This appointment time has already passed. Please select another available time."
-                        );
+        else {
 
-                        return;
+            alert("Please select a valid consultation package.");
 
-                    }
+            return;
 
-                }
+        }
 
 
-                /* =========================================
-                   CHECK LOGIN TOKEN
-                ========================================= */
+        /* =========================================
+           CHECK TODAY'S APPOINTMENT TIME
+        ========================================= */
 
-                const token = localStorage.getItem("token");
+        const todayString = getTodayDateString();
 
-                if (!token) {
+        if (selectedAppointmentDate === todayString) {
 
-                    alert(
-                        "Please log in before booking an appointment."
-                    );
+            if (isAppointmentHoursOver()) {
 
-                    return;
-
-                }
-
-
-                /* =========================================
-                   CREATE APPOINTMENT DATA
-                ========================================= */
-
-                const appointmentData = {
-
-                    phone: phone,
-
-                    appointmentType: appointmentType,
-
-                    appointmentDate: selectedAppointmentDate,
-
-                    appointmentTime: selectedAppointmentTime,
-
-                    mode: mode,
-
-                    reason: reason,
-
-                    packageType: "consultation_diet_plan",
-
-                    planDuration: planDuration
-
-                };
-
-
-                console.log(
-                    "Appointment data:",
-                    appointmentData
+                alert(
+                    "Appointments for today are already closed. Please select another date."
                 );
 
+                return;
 
-                /* =========================================
-                   GET BOOK BUTTON
-                ========================================= */
+            }
 
-                const bookButton =
-                    appointmentForm.querySelector(".book-btn");
+            const [selectedHour, selectedMinute] =
+                selectedAppointmentTime.split(":").map(Number);
 
-                const originalButtonText =
-                    bookButton
-                        ? bookButton.textContent
-                        : "Book Appointment";
+            const selectedTime = new Date();
 
-                if (bookButton) {
+            selectedTime.setHours(
+                selectedHour,
+                selectedMinute,
+                0,
+                0
+            );
 
-                    bookButton.disabled = true;
+            if (selectedTime <= new Date()) {
 
-                    bookButton.textContent = "Preparing Payment...";
+                alert(
+                    "This appointment time has already passed. Please select another available time."
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        /* =========================================
+           CHECK LOGIN
+        ========================================= */
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+
+            alert("Please log in before booking an appointment.");
+
+            return;
+
+        }
+
+
+        /* =========================================
+           CREATE APPOINTMENT DATA
+        ========================================= */
+
+        const appointmentData = {
+
+            phone: phone,
+
+            appointmentType: appointmentType,
+
+            appointmentDate: selectedAppointmentDate,
+
+            appointmentTime: selectedAppointmentTime,
+
+            mode: mode,
+
+            reason: reason,
+
+            packageType: packageType,
+
+            planDuration: planDuration
+
+        };
+
+
+        console.log("Selected consultation:", appointmentData);
+
+        console.log("Selected price:", selectedPrice);
+
+
+        /* =========================================
+           BOOK BUTTON
+        ========================================= */
+
+        const bookButton =
+            appointmentForm.querySelector(".book-btn");
+
+        const originalButtonText =
+            bookButton
+                ? bookButton.textContent
+                : "Book Appointment";
+
+        if (bookButton) {
+
+            bookButton.disabled = true;
+
+            bookButton.textContent = "Preparing Payment...";
+
+        }
+
+
+        try {
+
+            /* =====================================
+               STEP 1: CREATE RAZORPAY ORDER
+            ===================================== */
+
+            const paymentResponse = await fetch(
+                "https://healthynutrition.onrender.com/api/payment/create-order",
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type": "application/json",
+
+                        "Authorization": `Bearer ${token}`
+
+                    },
+
+                    body: JSON.stringify({
+
+                        packageType: packageType,
+
+                        planDuration: planDuration
+
+                    })
 
                 }
+            );
 
 
-                try {
-
-                    /* =====================================
-                       STEP 1
-                       CREATE RAZORPAY ORDER
-                    ===================================== */
-
-                    const paymentResponse = await fetch(
-                        "https://healthynutrition.onrender.com/api/payment/create-order",
-                        {
-                            method: "POST",
-
-                            headers: {
-
-                                "Content-Type": "application/json",
-
-                                "Authorization": `Bearer ${token}`
-
-                            },
-
-                            body: JSON.stringify({
-
-                                planDuration: planDuration
-
-                            })
-
-                        }
-                    );
+            const paymentData = await paymentResponse.json();
 
 
-                    const paymentData =
-                        await paymentResponse.json();
+            if (!paymentResponse.ok) {
+
+                throw new Error(
+                    paymentData.message ||
+                    "Unable to create payment order."
+                );
+
+            }
 
 
-                    if (!paymentResponse.ok) {
+            if (!paymentData.order?.id || !paymentData.key) {
 
-                        throw new Error(
-                            paymentData.message ||
-                            "Unable to create payment order."
-                        );
+                throw new Error(
+                    "The server returned an invalid payment order."
+                );
+
+            }
+
+
+            console.log("Razorpay order:", paymentData);
+
+
+            /* =====================================
+               STEP 2: RAZORPAY OPTIONS
+            ===================================== */
+
+            const description =
+                packageType === "consultation_only"
+                    ? "Consultation Only"
+                    : `Consultation + Diet Plan (${planDuration.replace("_", " ")})`;
+
+
+            const options = {
+
+                key: paymentData.key,
+
+                amount: paymentData.order.amount,
+
+                currency: paymentData.order.currency || "INR",
+
+                name: "HealthyNutrition",
+
+                description: description,
+
+                order_id: paymentData.order.id,
+
+
+                /* =================================
+                   PAYMENT SUCCESS
+                ================================= */
+
+                handler: async function (paymentResult) {
+
+                    if (bookButton) {
+
+                        bookButton.textContent = "Verifying Payment...";
 
                     }
 
+                    try {
 
-                    if (
-                        !paymentData.order?.id ||
-                        !paymentData.key
-                    ) {
+                        /* =========================
+                           STEP 3:
+                           VERIFY PAYMENT AND SAVE
+                           APPOINTMENT
+                        ========================= */
 
-                        throw new Error(
-                            "The server returned an invalid payment order."
+                        const response = await fetch(
+                            "https://healthynutrition.onrender.com/api/appointments",
+                            {
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type": "application/json",
+
+                                    "Authorization": `Bearer ${token}`
+
+                                },
+
+                                body: JSON.stringify({
+
+                                    ...appointmentData,
+
+                                    razorpayOrderId:
+                                        paymentResult.razorpay_order_id,
+
+                                    razorpayPaymentId:
+                                        paymentResult.razorpay_payment_id,
+
+                                    razorpaySignature:
+                                        paymentResult.razorpay_signature
+
+                                })
+
+                            }
                         );
+
+
+                        const data = await response.json();
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                data.message ||
+                                "Payment was successful, but appointment confirmation failed. Payment ID: " +
+                                paymentResult.razorpay_payment_id
+                            );
+
+                        }
+
+
+                        /* =========================
+                           SUCCESS
+                        ========================= */
+
+                        alert(
+                            "Payment successful! Your appointment has been booked."
+                        );
+
+
+                        console.log(
+                            "Appointment saved:",
+                            data.appointment
+                        );
+
+
+                        /* RESET FORM */
+
+                        appointmentForm.reset();
+
+
+                        if (appointmentDate) {
+                            appointmentDate.value = "";
+                        }
+
+                        if (appointmentTime) {
+                            appointmentTime.value = "";
+                        }
+
+                        if (selectedDateText) {
+
+                            selectedDateText.textContent =
+                                "Please select a date";
+
+                        }
+
+
+                        /* REMOVE CALENDAR SELECTION */
+
+                        document
+                            .querySelectorAll(".calendar-day.selected")
+                            .forEach(element => {
+
+                                element.classList.remove("selected");
+
+                            });
+
+
+                        /* HIDE DIET PLAN OPTIONS AGAIN */
+
+                        const dietPlanOptions =
+                            document.getElementById("dietPlanOptions");
+
+                        if (dietPlanOptions) {
+                            dietPlanOptions.hidden = true;
+                        }
+
+
+                        /* RELOAD CALENDAR */
+
+                        await loadBookedDates();
+
+                        renderCalendar();
 
                     }
 
+                    catch (error) {
 
-                    console.log(
-                        "Razorpay order:",
-                        paymentData
-                    );
+                        console.error(
+                            "Appointment confirmation error:",
+                            error
+                        );
 
+                        alert(error.message);
 
-                    /* =====================================
-                       STEP 2
-                       RAZORPAY OPTIONS
-                    ===================================== */
+                    }
 
-                    const options = {
+                    finally {
 
-                        key: paymentData.key,
+                        if (bookButton) {
 
-                        amount: paymentData.order.amount,
+                            bookButton.disabled = false;
 
-                        currency:
-                            paymentData.order.currency || "INR",
-
-                        name: "HealthyNutrition",
-
-                        description:
-                            `Consultation + Diet Plan (${planDuration.replace("_", " ")})`,
-
-                        order_id: paymentData.order.id,
-
-
-                        /* =================================
-                           PAYMENT SUCCESS
-                        ================================= */
-
-                        handler: async function (paymentResult) {
-
-                            if (bookButton) {
-
-                                bookButton.textContent =
-                                    "Verifying Payment...";
-
-                            }
-
-                            try {
-
-                                /* =========================
-                                   STEP 3
-                                   VERIFY PAYMENT AND SAVE
-                                   APPOINTMENT
-                                ========================= */
-
-                                const response = await fetch(
-                                    "https://healthynutrition.onrender.com/api/appointments",
-                                    {
-                                        method: "POST",
-
-                                        headers: {
-
-                                            "Content-Type": "application/json",
-
-                                            "Authorization": `Bearer ${token}`
-
-                                        },
-
-                                        body: JSON.stringify({
-
-                                            ...appointmentData,
-
-                                            razorpayOrderId:
-                                                paymentResult.razorpay_order_id,
-
-                                            razorpayPaymentId:
-                                                paymentResult.razorpay_payment_id,
-
-                                            razorpaySignature:
-                                                paymentResult.razorpay_signature
-
-                                        })
-
-                                    }
-                                );
-
-
-                                const data = await response.json();
-
-
-                                if (!response.ok) {
-
-                                    throw new Error(
-                                        data.message ||
-                                        "Payment was received, but appointment confirmation failed. Contact support with your payment ID: " +
-                                        paymentResult.razorpay_payment_id
-                                    );
-
-                                }
-
-
-                                /* =========================
-                                   SUCCESS
-                                ========================= */
-
-                                alert(
-                                    "Payment verified! Your appointment has been booked."
-                                );
-
-
-                                console.log(
-                                    "Appointment saved:",
-                                    data.appointment
-                                );
-
-
-                                /* RESET FORM */
-
-                                appointmentForm.reset();
-
-
-                                if (appointmentDate) {
-                                    appointmentDate.value = "";
-                                }
-
-
-                                if (appointmentTime) {
-                                    appointmentTime.value = "";
-                                }
-
-
-                                if (selectedDateText) {
-
-                                    selectedDateText.textContent =
-                                        "Please select a date";
-
-                                }
-
-
-                                /* REMOVE SELECTED CALENDAR DATE */
-
-                                document
-                                    .querySelectorAll(
-                                        ".calendar-day.selected"
-                                    )
-                                    .forEach(element => {
-
-                                        element.classList.remove("selected");
-
-                                    });
-
-
-                                /* RELOAD CALENDAR */
-
-                                await loadBookedDates();
-
-                                renderCalendar();
-
-                            }
-
-                            catch (error) {
-
-                                console.error(
-                                    "Appointment confirmation error:",
-                                    error
-                                );
-
-                                alert(error.message);
-
-                            }
-
-                            finally {
-
-                                if (bookButton) {
-
-                                    bookButton.disabled = false;
-
-                                    bookButton.textContent =
-                                        originalButtonText;
-
-                                }
-
-                            }
-
-                        },
-
-
-                        /* =================================
-                           PREFILL DETAILS
-                        ================================= */
-
-                        prefill: {
-
-                            name: "",
-
-                            contact: phone
-
-                        },
-
-
-                        /* =================================
-                           THEME
-                        ================================= */
-
-                        theme: {
-
-                            color: "#2E8B57"
-
-                        },
-
-
-                        /* =================================
-                           PAYMENT POPUP CLOSED
-                        ================================= */
-
-                        modal: {
-
-                            ondismiss: function () {
-
-                                console.log(
-                                    "Payment popup closed"
-                                );
-
-                                if (bookButton) {
-
-                                    bookButton.disabled = false;
-
-                                    bookButton.textContent =
-                                        originalButtonText;
-
-                                }
-
-                            }
+                            bookButton.textContent = originalButtonText;
 
                         }
 
-                    };
+                    }
+
+                },
 
 
-                    /* =====================================
-                       OPEN RAZORPAY POPUP
-                    ===================================== */
+                /* =================================
+                   PREFILL
+                ================================= */
 
-                    const razorpayCheckout =
-                        new Razorpay(options);
+                prefill: {
+
+                    name: "",
+
+                    contact: phone
+
+                },
 
 
-                    razorpayCheckout.on(
-                        "payment.failed",
-                        function (response) {
+                /* =================================
+                   THEME
+                ================================= */
 
-                            console.error(
-                                "Razorpay payment failed:",
-                                response.error
-                            );
+                theme: {
 
-                            alert(
-                                response.error?.description ||
-                                "Payment failed. Please try again."
-                            );
+                    color: "#2E8B57"
 
-                            if (bookButton) {
+                },
 
-                                bookButton.disabled = false;
 
-                                bookButton.textContent =
-                                    originalButtonText;
+                /* =================================
+                   PAYMENT POPUP CLOSED
+                ================================= */
 
-                            }
+                modal: {
+
+                    ondismiss: function () {
+
+                        console.log("Payment popup closed");
+
+                        if (bookButton) {
+
+                            bookButton.disabled = false;
+
+                            bookButton.textContent = originalButtonText;
 
                         }
-                    );
 
-
-                    razorpayCheckout.open();
+                    }
 
                 }
 
-                catch (error) {
+            };
+
+
+            /* =====================================
+               OPEN RAZORPAY
+            ===================================== */
+
+            const razorpayCheckout = new Razorpay(options);
+
+
+            razorpayCheckout.on(
+                "payment.failed",
+                function (response) {
 
                     console.error(
-                        "Payment error:",
-                        error
+                        "Razorpay payment failed:",
+                        response.error
                     );
 
                     alert(
-                        error.message ||
-                        "Unable to start payment. Please try again."
+                        response.error?.description ||
+                        "Payment failed. Please try again."
                     );
 
                     if (bookButton) {
 
                         bookButton.disabled = false;
 
-                        bookButton.textContent =
-                            originalButtonText;
+                        bookButton.textContent = originalButtonText;
 
                     }
 
                 }
+            );
+
+
+            razorpayCheckout.open();
+
+        }
+
+        catch (error) {
+
+            console.error("Payment error:", error);
+
+            alert(
+                error.message ||
+                "Unable to start payment. Please try again."
+            );
+
+            if (bookButton) {
+
+                bookButton.disabled = false;
+
+                bookButton.textContent = originalButtonText;
 
             }
-        );
 
-    }
+        }
+
+    });
+
+}
 
 
     /* =====================================================
@@ -1442,7 +1468,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateAvailableTimeSlots: updateAvailableTimeSlots
 
     };
-    /* =====================================
+  /* =====================================
    CONSULTATION TYPE SELECTION
 ===================================== */
 
@@ -1459,16 +1485,28 @@ const durationRadios = document.querySelectorAll(
 );
 
 
+// Hide duration options when page first loads
+
+if (dietPlanOptions) {
+    dietPlanOptions.hidden = true;
+}
+
+
+// Duration is not required initially
+
+durationRadios.forEach(input => {
+    input.required = false;
+});
+
+
 packageTypeRadios.forEach(radio => {
 
     radio.addEventListener("change", function () {
 
         if (this.value === "consultation_diet_plan") {
 
-            // Show diet plan duration options
             dietPlanOptions.hidden = false;
 
-            // Duration is required for this choice
             durationRadios.forEach(input => {
                 input.required = true;
             });
@@ -1477,15 +1515,12 @@ packageTypeRadios.forEach(radio => {
 
         else if (this.value === "consultation_only") {
 
-            // Hide diet plan duration options
             dietPlanOptions.hidden = true;
 
-            // Remove duration requirement
             durationRadios.forEach(input => {
 
                 input.required = false;
 
-                // Clear previous duration selection
                 input.checked = false;
 
             });
