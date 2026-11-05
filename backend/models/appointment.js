@@ -31,6 +31,7 @@ const appointmentSchema = new mongoose.Schema(
             trim: true
         },
 
+
         // ==========================================
         // APPOINTMENT DETAILS
         // ==========================================
@@ -70,6 +71,7 @@ const appointmentSchema = new mongoose.Schema(
             default: ""
         },
 
+
         // ==========================================
         // PACKAGE DETAILS
         // ==========================================
@@ -78,19 +80,25 @@ const appointmentSchema = new mongoose.Schema(
             type: String,
             required: true,
             enum: [
+                "consultation_only",
                 "consultation_diet_plan"
-            ],
-            default: "consultation_diet_plan"
+            ]
         },
 
         planDuration: {
             type: String,
-            required: true,
+
             enum: [
                 "1_week",
                 "1_month",
                 "2_months"
-            ]
+            ],
+
+            required: function () {
+                return this.packageType === "consultation_diet_plan";
+            },
+
+            default: null
         },
 
         planPrice: {
@@ -98,6 +106,7 @@ const appointmentSchema = new mongoose.Schema(
             required: true,
             min: 0
         },
+
 
         // ==========================================
         // PAYMENT DETAILS
@@ -125,19 +134,31 @@ const appointmentSchema = new mongoose.Schema(
             default: null
         },
 
+
         // ==========================================
         // DIET PLAN DURATION
         // ==========================================
 
         planStartDate: {
             type: Date,
-            required: true
+
+            required: function () {
+                return this.packageType === "consultation_diet_plan";
+            },
+
+            default: null
         },
 
         planExpiryDate: {
             type: Date,
-            required: true
+
+            required: function () {
+                return this.packageType === "consultation_diet_plan";
+            },
+
+            default: null
         },
+
 
         // ==========================================
         // APPOINTMENT STATUS
@@ -152,11 +173,13 @@ const appointmentSchema = new mongoose.Schema(
             ],
             default: "confirmed"
         }
+
     },
     {
         timestamps: true
     }
 );
+
 
 // ==========================================
 // CREATE APPOINTMENT MODEL
